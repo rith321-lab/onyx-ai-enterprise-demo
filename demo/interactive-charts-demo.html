@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northern Tech Solutions - AI Analytics Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <style>
+        :root {
+            --primary-red: #e63946;
+            --primary-white: #f1faee;
+            --primary-light-blue: #a8dadc;
+            --primary-blue: #457b9d;
+            --primary-dark-blue: #1d3557;
+            --compliant-green: #2a9d8f;
+            --warning-yellow: #e9c46a;
+            --danger-red: #e76f51;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #dee2e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary-dark-blue);
+        }
+
+        .compliance-indicator {
+            display: flex;
+            align-items: center;
+            background-color: var(--compliant-green);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .compliance-indicator i {
+            margin-right: 8px;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-rows: auto auto;
+            gap: 20px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-item label {
+            font-size: 12px;
+            margin-bottom: 5px;
+            color: var(--primary-dark-blue);
+            font-weight: 600;
+        }
+
+        .filter-item select, .filter-item input {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--card-bg);
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            color: var(--primary-dark-blue);
+            font-weight: 600;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .card-actions button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--primary-blue);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .metric-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-dark-blue);
+            margin: 10px 0;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .metric-trend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .trend-up {
+            color: var(--compliant-green);
+        }
+
+        .trend-down {
+            color: var(--danger-red);
+        }
+
+        .trend-icon {
+            margin-right: 5px;
+        }
+
+        .chat-container {
+            grid-row: span 2;
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .chat-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-dark-blue);
+        }
+
+        .chat-messages {
+            height: 600px;
+            overflow-y: auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 15px;
+            border-radius: 18px;
+            line-height: 1.4;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: var(--primary-blue);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .ai-message {
+            align-self: flex-start;
+            background-color: #f0f0f0;
+            color: var(--text-color);
+            border-bottom-left-radius: 5px;
+        }
+
+        .chat-input-container {
+            display: flex;
+            margin-top: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            overflow: hidden;
+            padding: 5px;
+        }
+
+        .chat-input {
+            flex: 1;
+            border: none;
+            padding: 10px 15px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .send-button {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .predictive-section {
+            margin-top: 30px;
+        }
+
+        .predictive-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .predictive-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-dark-blue);
+        }
+
+        .predictive-tag {
+            background-color: var(--primary-light-blue);
+            color: var(--primary-dark-blue);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .data-compliance {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--compliant-green);
+        }
+
+        .data-compliance i {
+            margin-right: 5px;
+        }
+
+        .maple-leaf {
+            color: var(--primary-red);
+            margin-right: 5px;
+        }
+
+        .canadian-flag {
+            width: 24px;
+            height: auto;
+            margin-right: 8px;
+        }
+
+        .prediction-details {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .prediction-card {
+            flex: 1;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+        }
+
+        .prediction-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-dark-blue);
+            margin: 10px 0;
+        }
+
+        .prediction-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .prediction-confidence {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .confidence-high {
+            color: var(--compliant-green);
+        }
+
+        .confidence-medium {
+            color: var(--warning-yellow);
+        }
+
+        .confidence-low {
+            color: var(--danger-red);
+        }
+
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .data-source-info {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .data-source-tag {
+            background-color: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+
+        /* Canadian theme elements */
+        .canadian-theme {
+            border-top: 3px solid var(--primary-red);
+            position: relative;
+        }
+
+        .canadian-theme::before {
+            content: "🍁";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 20px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .metrics {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="maple-leaf">🍁</span>
+                <h1>Northern Tech Solutions</h1>
+            </div>
+            <div class="compliance-indicator">
+                <i class="fas fa-shield-alt"></i>
+                <span>Canadian Data Compliant</span>
+            </div>
+        </header>
+
+        <div class="filters">
+            <div class="filter-item">
+                <label>Date Range</label>
+                <select id="date-range">
+                    <option value="ytd">Year to Date</option>
+                    <option value="last-quarter">Last Quarter</option>
+                    <option value="last-year">Last Year</option>
+                    <option value="all-time">All Time</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>Product</label>
+                <select id="product-filter">
+                    <option value="all">All Products</option>
+                    <option value="P001">SecureVault</option>
+                    <option value="P002">CloudNorth</option>
+                    <option value="P003">DataInsight</option>
+                    <option value="P004">ComplianceGuard</option>
+                    <option value="P005">NorthStar CRM</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>Region</label>
+                <select id="region-filter">
+                    <option value="all">All Regions</option>
+                    <option value="Ontario">Ontario</option>
+                    <option value="Quebec">Quebec</option>
+                    <option value="British Columbia">British Columbia</option>
+                    <option value="Alberta">Alberta</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>Customer Segment</label>
+                <select id="segment-filter">
+                    <option value="all">All Segments</option>
+                    <option value="Enterprise">Enterprise</option>
+                    <option value="Mid-market">Mid-market</option>
+                    <option value="Small Business">Small Business</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="main-content">
+                <div class="metrics">
+                    <div class="metric-card">
+                        <div class="metric-label">Total Revenue (YTD)</div>
+                        <div class="metric-value">$8.7M</div>
+                        <div class="metric-trend">
+                            <i class="fas fa-arrow-up trend-up trend-icon"></i>
+                            <span class="trend-up">12.4% vs. Last Year</span>
+                        </div>
+                        <div class="data-compliance">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Canadian Data Center</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Active Customers</div>
+                        <div class="metric-value">142</div>
+                        <div class="metric-trend">
+                            <i class="fas fa-arrow-up trend-up trend-icon"></i>
+                            <span class="trend-up">8.3% vs. Last Year</span>
+                        </div>
+                        <div class="data-compliance">
+                            <i class="fas fa-check-circle"></i>
+                            <span>PIPEDA Compliant</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Customer Satisfaction</div>
+                        <div class="metric-value">4.7/5</div>
+                        <div class="metric-trend">
+                            <i class="fas fa-arrow-up trend-up trend-icon"></i>
+                            <span class="trend-up">0.2 vs. Last Year</span>
+                        </div>
+                        <div class="data-compliance">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Encrypted Feedback</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Avg Contract Value</div>
+                        <div class="metric-value">$248K</div>
+                        <div class="metric-trend">
+                            <i class="fas fa-arrow-up trend-up trend-icon"></i>
+                            <span class="trend-up">5.2% vs. Last Year</span>
+                        </div>
+                        <div class="data-compliance">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Financial Privacy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-grid">
+                    <div class="card canadian-theme full-width">
+                        <div class="card-header">
+                            <div class="card-title">Revenue Trends & Forecast</div>
+                            <div class="card-actions">
+                                <div class="tooltip">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span class="tooltiptext">Quarterly revenue with AI-powered forecast for next 2 quarters</span>
+                                </div>
+                                <button id="download-revenue"><i class="fas fa-download"></i></button>
+                                <button id="expand-revenue"><i class="fas fa-expand"></i></button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="revenue-chart"></canvas>
+                        </div>
+                        <div class="data-source-info">
+                            <span class="data-source-tag">Canadian Data Source</span>
+                            <span>Last updated: June 6, 2025</span>
+                        </div>
+                    </div>
+
+                    <div class="card canadian-theme">
+                        <div class="card-header">
+                            <div class="card-title">Product Performance</div>
+                            <div class="card-actions">
+                                <div class="tooltip">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span class="tooltiptext">Revenue breakdown by product line</span>
+                                </div>
+                                <button id="download-products"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="product-chart"></canvas>
+                        </div>
+                        <div class="data-source-info">
+                            <span class="data-source-tag">Canadian Data Source</span>
+                            <span>Last updated: June 6, 2025</span>
+                        </div>
+                    </div>
+
+                    <div class="card canadian-theme">
+                        <div class="card-header">
+                            <div class="card-title">Customer Distribution</div>
+                            <div class="card-actions">
+                                <div class="tooltip">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span class="tooltiptext">Customer distribution by industry and region</span>
+                                </div>
+                                <button id="download-customers"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="customer-chart"></canvas>
+                        </div>
+                        <div class="data-source-info">
+                            <span class="data-source-tag">Canadian Data Source</span>
+                            <span>Last updated: June 6, 2025</span>
+                        </div>
+                    </div>
+
+                    <div class="card canadian-theme full-width">
+                        <div class="card-header">
+                            <div class="card-title">Market Share vs. Competitors</div>
+                            <div class="card-actions">
+                                <div class="tooltip">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span class="tooltiptext">Market share comparison across product categories</span>
+                                </div>
+                                <button id="download-market"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="market-chart"></canvas>
+                        </div>
+                        <div class="data-source-info">
+                            <span class="data-source-tag">Canadian Data Source</span>
+                            <span>Last updated: June 6, 2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="predictive-section">
+                    <div class="predictive-header">
+                        <div class="predictive-title">AI-Powered Predictive Analytics</div>
+                        <div class="predictive-tag">Canadian AI Models</div>
+                    </div>
+                    
+                    <div class="card canadian-theme">
+                        <div class="card-header">
+                            <div class="card-title">Customer Churn Prediction</div>
+                            <div class="card-actions">
+                                <button id="refresh-predictions"><i class="fas fa-sync-alt"></i></button>
+                                <div class="tooltip">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span class="tooltiptext">AI-powered predictions based on customer behavior patterns</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="churn-prediction-chart"></canvas>
+                        </div>
+                        <div class="prediction-details">
+                            <div class="prediction-card">
+                                <div class="prediction-label">At-Risk Customers</div>
+                                <div class="prediction-value">3</div>
+                                <div class="prediction-confidence confidence-high">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>High Confidence (92%)</span>
+                                </div>
+                            </div>
+                            <div class="prediction-card">
+                                <div class="prediction-label">Potential Revenue Impact</div>
+                                <div class="prediction-value">$685K</div>
+                                <div class="prediction-confidence confidence-medium">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Medium Confidence (78%)</span>
+                                </div>
+                            </div>
+                            <div class="prediction-card">
+                                <div class="prediction-label">Recommended Actions</div>
+                                <div class="prediction-value">5</div>
+                                <div class="prediction-confidence confidence-high">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>High Confidence (95%)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card canadian-theme">
+                        <div class="card-header">
+                            <div class="card-title">Revenue Forecast (Next 12 Months)</div>
+                            <div class="card-actions">
+                                <button id="refresh-forecast"><i class="fas fa-sync-alt"></i></button>
+                                <div class="tooltip">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span class="tooltiptext">AI-powered revenue forecast with confidence intervals</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="forecast-chart"></canvas>
+                        </div>
+                        <div class="prediction-details">
+                            <div class="prediction-card">
+                                <div class="prediction-label">Projected Growth</div>
+                                <div class="prediction-value">18.3%</div>
+                                <div class="prediction-confidence confidence-high">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>High Confidence (89%)</span>
+                                </div>
+                            </div>
+                            <div class="prediction-card">
+                                <div class="prediction-label">Top Growth Product</div>
+                                <div class="prediction-value">CloudNorth</div>
+                                <div class="prediction-confidence confidence-high">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>High Confidence (91%)</span>
+                                </div>
+                            </div>
+                            <div class="prediction-card">
+                                <div class="prediction-label">Market Expansion</div>
+                                <div class="prediction-value">Healthcare</div>
+                                <div class="prediction-confidence confidence-medium">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Medium Confidence (76%)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-container card">
+                <div class="chat-header">
+                    <div class="chat-title">
+                        <i class="fas fa-robot"></i> AI Data Assistant
+                    </div>
+                    <div class="compliance-indicator" style="font-size: 12px; padding: 4px 8px;">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Canadian LLM</span>
+                    </div>
+                </div>
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message ai-message">
+                        <p>👋 Hello! I'm your AI data assistant for Northern Tech Solutions. I can help you explore company data, analyze trends, and answer questions about our business performance.</p>
+                        <p>All data processing occurs in Canadian data centers in compliance with privacy regulations. What would you like to know?</p>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="chat-input" placeholder="Ask about company data, trends, or insights..." />
+                    <button class="send-button" id="send-message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data based on the mock company data
+        const companyData = {
+            revenue: {
+                quarterly: {
+                    labels: ['2023 Q1', '2023 Q2', '2023 Q3', '2023 Q4', '2024 Q1', '2024 Q2'],
+                    actual: [3450000, 3650000, 3800000, 3950000, 4250000, 4450000],
+                    forecast: [null, null, null, null, null, null, 4650000, 4850000],
+                    forecastLabels: ['2023 Q1', '2023 Q2', '2023 Q3', '2023 Q4', '2024 Q1', '2024 Q2', '2024 Q3', '2024 Q4']
+                },
+                yearly: {
+                    labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+                    values: [5200000, 7800000, 10500000, 12900000, 14850000, 17820000]
+                }
+            },
+            products: {
+                names: ['SecureVault', 'CloudNorth', 'DataInsight', 'ComplianceGuard', 'NorthStar CRM'],
+                revenue: [3250000, 4750000, 2850000, 2100000, 1950000],
+                growth: [15, 22, 18, 25, 31]
+            },
+            customers: {
+                industries: ['Banking & Finance', 'E-commerce', 'Retail', 'Financial Services', 'Insurance', 'Telecommunications', 'Food Production', 'Technology'],
+                counts: [3, 1, 1, 1, 1, 1, 1, 3],
+                regions: ['Ontario', 'Quebec', 'British Columbia', 'Alberta'],
+                regionCounts: [5, 4, 2, 1]
+            },
+            market: {
+                categories: ['Data Security', 'Cloud Infrastructure', 'Business Intelligence', 'Regulatory Compliance', 'CRM'],
+                ourShare: [8.5, 6.2, 5.8, 12.3, 4.1],
+                competitors: {
+                    'TechShield Canada': [12.3, 3.5, 2.1, 4.2, 0],
+                    'CloudWave Solutions': [2.1, 15.7, 3.5, 1.2, 0],
+                    'DataVision Analytics': [1.5, 2.3, 10.2, 0, 2.7],
+                    'ComplianceFirst': [3.2, 0, 0, 9.5, 0]
+                }
+            },
+            churn: {
+                riskLevels: ['Low Risk', 'Medium Risk', 'High Risk'],
+                customers: [9, 2, 1],
+                industries: ['Banking', 'Insurance', 'Telecommunications']
+            },
+            forecast: {
+                months: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                expected: [1550000, 1580000, 1620000, 1650000, 1700000, 1750000, 1800000, 1830000, 1870000, 1900000, 1950000, 2000000],
+                upperBound: [1600000, 1650000, 1700000, 1750000, 1820000, 1880000, 1950000, 2000000, 2050000, 2100000, 2150000, 2200000],
+                lowerBound: [1500000, 1510000, 1540000, 1550000, 1580000, 1620000, 1650000, 1660000, 1690000, 1700000, 1750000, 1800000]
+            }
+        };
+
+        // Chat functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatMessages = document.getElementById('chat-messages');
+            const chatInput = document.getElementById('chat-input');
+            const sendButton = document.getElementById('send-message');
+
+            // Sample predefined responses
+            const responses = {
+                revenue: "Based on our financial data, Northern Tech Solutions has seen steady revenue growth over the past 5 years. In 2023, we achieved $14.85M in revenue, a 15% increase from 2022. Our Q1 2024 revenue was $4.25M, up 23% from Q1 2023. The AI model predicts we'll reach approximately $17.82M by the end of 2024, representing a 20% YoY growth.",
+                products: "Our top performing product is CloudNorth with $4.75M in revenue and 22% growth rate. SecureVault follows with $3.25M and 15% growth. The fastest growing product is NorthStar CRM at 31% growth rate, though it has the lowest revenue at $1.95M currently.",
+                customers: "We currently have 142 active customers across Canada. The majority are in Ontario (5) and Quebec (4), with Banking & Finance being our largest customer segment. Our customer satisfaction score is 4.7/5, which has improved by 0.2 points compared to last year.",
+                market: "Northern Tech Solutions has the strongest market position in Regulatory Compliance with 12.3% market share. Our main competitor is TechShield Canada in the Data Security space, where they hold 12.3% market share compared to our 8.5%. The fastest growing market segment is Cloud Infrastructure at 18.5% industry growth rate.",
+                forecast: "Our AI models predict 18.3% revenue growth over the next 12 months with high confidence (89%). CloudNorth is expected to be our top growth product. We're also projecting significant expansion in the Healthcare sector, though this prediction has medium confidence (76%) due to regulatory uncertainties.",
+                compliance: "All Northern Tech Solutions data is stored exclusively in Canadian data centers in compliance with PIPEDA and provincial privacy laws. We implement end-to-end encryption for all customer data, and our systems are certified for financial data privacy. Our ComplianceGuard product ensures customers maintain regulatory compliance."
+            };
+
+            // Add event listeners
+            sendButton.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message === '') return;
+
+                // Add user message to chat
+                addMessage(message, 'user');
+                chatInput.value = '';
+
+                // Simulate AI thinking
+                setTimeout(() => {
+                    // Add typing indicator
+                    const typingIndicator = document.createElement('div');
+                    typingIndicator.className = 'message ai-message';
+                    typingIndicator.id = 'typing-indicator';
+                    typingIndicator.innerHTML = '<span class="loader"></span> Analyzing data...';
+                    chatMessages.appendChild(typingIndicator);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                    // Process the message and respond after a delay
+                    setTimeout(() => {
+                        // Remove typing indicator
+                        const indicator = document.getElementById('typing-indicator');
+                        if (indicator) chatMessages.removeChild(indicator);
+
+                        // Generate response based on keywords
+                        let response = "I'm not sure I understand your question. Could you please rephrase it or ask about our revenue, products, customers, market position, forecasts, or compliance?";
+                        
+                        const lowerMessage = message.toLowerCase();
+                        if (lowerMessage.includes('revenue') || lowerMessage.includes('sales') || lowerMessage.includes('financial')) {
+                            response = responses.revenue;
+                        } else if (lowerMessage.includes('product') || lowerMessage.includes('service')) {
+                            response = responses.products;
+                        } else if (lowerMessage.includes('customer') || lowerMessage.includes('client')) {
+                            response = responses.customers;
+                        } else if (lowerMessage.includes('market') || lowerMessage.includes('competitor')) {
+                            response = responses.market;
+                        } else if (lowerMessage.includes('forecast') || lowerMessage.includes('predict') || lowerMessage.includes('future')) {
+                            response = responses.forecast;
+                        } else if (lowerMessage.includes('compliance') || lowerMessage.includes('privacy') || lowerMessage.includes('security') || lowerMessage.includes('data')) {
+                            response = responses.compliance;
+                        } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                            response = "Hello! I'm your AI data assistant for Northern Tech Solutions. How can I help you analyze our business data today?";
+                        }
+
+                        // Add AI response
+                        addMessage(response, 'ai');
+                    }, 1500);
+                }, 500);
+            }
+
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}-message`;
+                messageDiv.textContent = text;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // Initialize charts
+            initializeCharts();
+        });
+
+        function initializeCharts() {
+            // Revenue Chart
+            const revenueCtx = document.getElementById('revenue-chart').getContext('2d');
+            const revenueChart = new Chart(revenueCtx, {
+                type: 'line',
+                data: {
+                    labels: companyData.revenue.quarterly.forecastLabels,
+                    datasets: [
+                        {
+                            label: 'Actual Revenue',
+                            data: [...companyData.revenue.quarterly.actual, null, null],
+                            borderColor: '#457b9d',
+                            backgroundColor: 'rgba(69, 123, 157, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Forecasted Revenue',
+                            data: companyData.revenue.quarterly.forecast,
+                            borderColor: '#e63946',
+                            backgroundColor: 'rgba(230, 57, 70, 0.1)',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('en-CA', { 
+                                            style: 'currency', 
+                                            currency: 'CAD',
+                                            maximumFractionDigits: 0
+                                        }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + (value / 1000000).toFixed(1) + 'M';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Revenue (CAD)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Quarter'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Product Chart
+            const productCtx = document.getElementById('product-chart').getContext('2d');
+            const productChart = new Chart(productCtx, {
+                type: 'bar',
+                data: {
+                    labels: companyData.products.names,
+                    datasets: [
+                        {
+                            label: 'Revenue (CAD)',
+                            data: companyData.products.revenue,
+                            backgroundColor: [
+                                'rgba(69, 123, 157, 0.7)',
+                                'rgba(230, 57, 70, 0.7)',
+                                'rgba(168, 218, 220, 0.7)',
+                                'rgba(29, 53, 87, 0.7)',
+                                'rgba(241, 250, 238, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(69, 123, 157, 1)',
+                                'rgba(230, 57, 70, 1)',
+                                'rgba(168, 218, 220, 1)',
+                                'rgba(29, 53, 87, 1)',
+                                'rgba(241, 250, 238, 1)'
+                            ],
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('en-CA', { 
+                                            style: 'currency', 
+                                            currency: 'CAD',
+                                            maximumFractionDigits: 0
+                                        }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                },
+                                afterLabel: function(context) {
+                                    return 'Growth: ' + companyData.products.growth[context.dataIndex] + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + (value / 1000000).toFixed(1) + 'M';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Customer Chart
+            const customerCtx = document.getElementById('customer-chart').getContext('2d');
+            const customerChart = new Chart(customerCtx, {
+                type: 'pie',
+                data: {
+                    labels: companyData.customers.regions,
+                    datasets: [
+                        {
+                            data: companyData.customers.regionCounts,
+                            backgroundColor: [
+                                'rgba(230, 57, 70, 0.7)',
+                                'rgba(69, 123, 157, 0.7)',
+                                'rgba(168, 218, 220, 0.7)',
+                                'rgba(29, 53, 87, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(230, 57, 70, 1)',
+                                'rgba(69, 123, 157, 1)',
+                                'rgba(168, 218, 220, 1)',
+                                'rgba(29, 53, 87, 1)'
+                            ],
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${value} customers (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Market Share Chart
+            const marketCtx = document.getElementById('market-chart').getContext('2d');
+            const marketChart = new Chart(marketCtx, {
+                type: 'radar',
+                data: {
+                    labels: companyData.market.categories,
+                    datasets: [
+                        {
+                            label: 'Northern Tech Solutions',
+                            data: companyData.market.ourShare,
+                            backgroundColor: 'rgba(230, 57, 70, 0.2)',
+                            borderColor: 'rgba(230, 57, 70, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(230, 57, 70, 1)'
+                        },
+                        {
+                            label: 'TechShield Canada',
+                            data: Object.values(companyData.market.competitors)[0],
+                            backgroundColor: 'rgba(69, 123, 157, 0.2)',
+                            borderColor: 'rgba(69, 123, 157, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(69, 123, 157, 1)'
+                        },
+                        {
+                            label: 'CloudWave Solutions',
+                            data: Object.values(companyData.market.competitors)[1],
+                            backgroundColor: 'rgba(168, 218, 220, 0.2)',
+                            borderColor: 'rgba(168, 218, 220, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(168, 218, 220, 1)'
+                        },
+                        {
+                            label: 'DataVision Analytics',
+                            data: Object.values(companyData.market.competitors)[2],
+                            backgroundColor: 'rgba(29, 53, 87, 0.2)',
+                            borderColor: 'rgba(29, 53, 87, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(29, 53, 87, 1)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 20,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.r + '% market share';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Churn Prediction Chart
+            const churnCtx = document.getElementById('churn-prediction-chart').getContext('2d');
+            const churnChart = new Chart(churnCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: companyData.churn.riskLevels,
+                    datasets: [
+                        {
+                            data: companyData.churn.customers,
+                            backgroundColor: [
+                                'rgba(42, 157, 143, 0.7)',
+                                'rgba(233, 196, 106, 0.7)',
+                                'rgba(231, 111, 81, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(42, 157, 143, 1)',
+                                'rgba(233, 196, 106, 1)',
+                                'rgba(231, 111, 81, 1)'
+                            ],
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${value} customers (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Forecast Chart
+            const forecastCtx = document.getElementById('forecast-chart').getContext('2d');
+            const forecastChart = new Chart(forecastCtx, {
+                type: 'line',
+                data: {
+                    labels: companyData.forecast.months,
+                    datasets: [
+                        {
+                            label: 'Expected Revenue',
+                            data: companyData.forecast.expected,
+                            borderColor: 'rgba(69, 123, 157, 1)',
+                            backgroundColor: 'rgba(69, 123, 157, 0)',
+                            borderWidth: 3,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Upper Bound (95% CI)',
+                            data: companyData.forecast.upperBound,
+                            borderColor: 'rgba(69, 123, 157, 0.3)',
+                            backgroundColor: 'rgba(69, 123, 157, 0.1)',
+                            borderWidth: 1,
+                            borderDash: [5, 5],
+                            fill: '+1',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Lower Bound (95% CI)',
+                            data: companyData.forecast.lowerBound,
+                            borderColor: 'rgba(69, 123, 157, 0.3)',
+                            backgroundColor: 'rgba(69, 123, 157, 0.1)',
+                            borderWidth: 1,
+                            borderDash: [5, 5],
+                            fill: false,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('en-CA', { 
+                                            style: 'currency', 
+                                            currency: 'CAD',
+                                            maximumFractionDigits: 0
+                                        }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + (value / 1000000).toFixed(1) + 'M';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Revenue (CAD)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Month'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Add event listeners for filters
+            document.getElementById('date-range').addEventListener('change', updateCharts);
+            document.getElementById('product-filter').addEventListener('change', updateCharts);
+            document.getElementById('region-filter').addEventListener('change', updateCharts);
+            document.getElementById('segment-filter').addEventListener('change', updateCharts);
+
+            // Refresh button functionality
+            document.getElementById('refresh-predictions').addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i>';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-sync-alt"></i>';
+                    // Could update chart data here if needed
+                }, 1500);
+            });
+
+            document.getElementById('refresh-forecast').addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i>';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-sync-alt"></i>';
+                    // Could update chart data here if needed
+                }, 1500);
+            });
+
+            function updateCharts() {
+                // This would normally update charts based on filter selections
+                // For demo purposes, we'll just add a small animation
+                revenueChart.update();
+                productChart.update();
+                customerChart.update();
+                marketChart.update();
+            }
+        }
+    </script>
+</body>
+</html>

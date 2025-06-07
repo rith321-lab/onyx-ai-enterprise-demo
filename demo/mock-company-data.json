@@ -1,0 +1,946 @@
+{
+  "company": {
+    "name": "Northern Tech Solutions",
+    "founded": "2011-03-15",
+    "headquarters": "Toronto, Ontario, Canada",
+    "mission": "Empowering Canadian businesses with innovative technology solutions while maintaining the highest standards of data privacy and security.",
+    "industry": "Information Technology",
+    "registration": {
+      "business_number": "754291638RC0001",
+      "type": "Corporation",
+      "jurisdiction": "Federal"
+    },
+    "locations": [
+      {
+        "city": "Toronto",
+        "province": "Ontario",
+        "address": "2250 Young Street, Suite 500",
+        "postal_code": "M4P 2X7",
+        "type": "Headquarters",
+        "employees": 124
+      },
+      {
+        "city": "Vancouver",
+        "province": "British Columbia",
+        "address": "1055 West Georgia Street, Suite 900",
+        "postal_code": "V6E 3P3",
+        "type": "Regional Office",
+        "employees": 58
+      },
+      {
+        "city": "Montreal",
+        "province": "Quebec",
+        "address": "1250 Boulevard René-Lévesque Ouest, Suite 2200",
+        "postal_code": "H3B 4W8",
+        "type": "Regional Office",
+        "employees": 67
+      },
+      {
+        "city": "Calgary",
+        "province": "Alberta",
+        "address": "639 5 Avenue SW, Suite 1600",
+        "postal_code": "T2P 0M9",
+        "type": "Regional Office",
+        "employees": 32
+      }
+    ]
+  },
+  "employees": [
+    {
+      "id": "E001",
+      "first_name": "Marie",
+      "last_name": "Tremblay",
+      "title": "Chief Executive Officer",
+      "department": "Executive",
+      "email": "marie.tremblay@northerntech.ca",
+      "phone": "+1-416-555-1001",
+      "hire_date": "2011-03-15",
+      "location": "Toronto",
+      "reports_to": null,
+      "salary": 285000,
+      "performance": {
+        "2022": 4.8,
+        "2023": 4.9,
+        "2024": 4.7
+      },
+      "skills": ["Strategic Planning", "Leadership", "Business Development", "Public Speaking", "Financial Management"]
+    },
+    {
+      "id": "E002",
+      "first_name": "David",
+      "last_name": "Chen",
+      "title": "Chief Technology Officer",
+      "department": "Technology",
+      "email": "david.chen@northerntech.ca",
+      "phone": "+1-416-555-1002",
+      "hire_date": "2011-05-10",
+      "location": "Toronto",
+      "reports_to": "E001",
+      "salary": 240000,
+      "performance": {
+        "2022": 4.7,
+        "2023": 4.8,
+        "2024": 4.9
+      },
+      "skills": ["Software Architecture", "Cloud Computing", "AI/ML", "Team Leadership", "Strategic Planning"]
+    },
+    {
+      "id": "E003",
+      "first_name": "Sarah",
+      "last_name": "Johnson",
+      "title": "Chief Financial Officer",
+      "department": "Finance",
+      "email": "sarah.johnson@northerntech.ca",
+      "phone": "+1-416-555-1003",
+      "hire_date": "2012-01-15",
+      "location": "Toronto",
+      "reports_to": "E001",
+      "salary": 235000,
+      "performance": {
+        "2022": 4.6,
+        "2023": 4.7,
+        "2024": 4.8
+      },
+      "skills": ["Financial Planning", "Risk Management", "Investor Relations", "Regulatory Compliance", "Strategic Planning"]
+    },
+    {
+      "id": "E004",
+      "first_name": "Jean",
+      "last_name": "Bouchard",
+      "title": "VP of Sales",
+      "department": "Sales",
+      "email": "jean.bouchard@northerntech.ca",
+      "phone": "+1-514-555-1004",
+      "hire_date": "2013-03-22",
+      "location": "Montreal",
+      "reports_to": "E001",
+      "salary": 195000,
+      "performance": {
+        "2022": 4.5,
+        "2023": 4.3,
+        "2024": 4.7
+      },
+      "skills": ["Sales Strategy", "Negotiation", "Client Relations", "Team Leadership", "Market Analysis"]
+    },
+    {
+      "id": "E005",
+      "first_name": "Priya",
+      "last_name": "Sharma",
+      "title": "VP of Marketing",
+      "department": "Marketing",
+      "email": "priya.sharma@northerntech.ca",
+      "phone": "+1-416-555-1005",
+      "hire_date": "2014-06-10",
+      "location": "Toronto",
+      "reports_to": "E001",
+      "salary": 185000,
+      "performance": {
+        "2022": 4.4,
+        "2023": 4.6,
+        "2024": 4.8
+      },
+      "skills": ["Digital Marketing", "Brand Strategy", "Content Development", "Market Research", "Team Leadership"]
+    },
+    {
+      "id": "E006",
+      "first_name": "Michael",
+      "last_name": "Wong",
+      "title": "Director of Engineering",
+      "department": "Technology",
+      "email": "michael.wong@northerntech.ca",
+      "phone": "+1-604-555-1006",
+      "hire_date": "2015-02-15",
+      "location": "Vancouver",
+      "reports_to": "E002",
+      "salary": 165000,
+      "performance": {
+        "2022": 4.7,
+        "2023": 4.8,
+        "2024": 4.6
+      },
+      "skills": ["Software Development", "DevOps", "Team Leadership", "Project Management", "System Architecture"]
+    },
+    {
+      "id": "E007",
+      "first_name": "Emily",
+      "last_name": "Lavoie",
+      "title": "Director of Customer Success",
+      "department": "Customer Service",
+      "email": "emily.lavoie@northerntech.ca",
+      "phone": "+1-416-555-1007",
+      "hire_date": "2016-04-20",
+      "location": "Toronto",
+      "reports_to": "E004",
+      "salary": 145000,
+      "performance": {
+        "2022": 4.8,
+        "2023": 4.9,
+        "2024": 4.7
+      },
+      "skills": ["Customer Relations", "Problem Solving", "Team Leadership", "Project Management", "Communication"]
+    },
+    {
+      "id": "E008",
+      "first_name": "Ahmed",
+      "last_name": "Hassan",
+      "title": "Lead Data Scientist",
+      "department": "Technology",
+      "email": "ahmed.hassan@northerntech.ca",
+      "phone": "+1-416-555-1008",
+      "hire_date": "2017-09-12",
+      "location": "Toronto",
+      "reports_to": "E002",
+      "salary": 155000,
+      "performance": {
+        "2022": 4.9,
+        "2023": 4.8,
+        "2024": 4.9
+      },
+      "skills": ["Machine Learning", "Data Analysis", "Python", "Statistical Modeling", "Natural Language Processing"]
+    }
+  ],
+  "products": [
+    {
+      "id": "P001",
+      "name": "SecureVault",
+      "category": "Data Security",
+      "description": "Enterprise-grade data encryption and security solution with Canadian data residency compliance.",
+      "launch_date": "2013-05-20",
+      "version": "4.2.1",
+      "pricing_model": "Subscription",
+      "base_price_cad": 15000,
+      "features": [
+        "End-to-end encryption",
+        "Canadian data residency",
+        "Compliance with PIPEDA",
+        "Access control management",
+        "Audit logging",
+        "Threat detection"
+      ],
+      "customers": 87,
+      "revenue_2023_cad": 3250000,
+      "growth_rate": 0.15
+    },
+    {
+      "id": "P002",
+      "name": "CloudNorth",
+      "category": "Cloud Infrastructure",
+      "description": "Canadian-hosted cloud infrastructure service with guaranteed data sovereignty.",
+      "launch_date": "2014-11-10",
+      "version": "3.5.0",
+      "pricing_model": "Usage-based",
+      "base_price_cad": 5000,
+      "features": [
+        "Canadian data centers",
+        "Scalable compute resources",
+        "Managed storage",
+        "Disaster recovery",
+        "24/7 technical support",
+        "Compliance certifications"
+      ],
+      "customers": 142,
+      "revenue_2023_cad": 4750000,
+      "growth_rate": 0.22
+    },
+    {
+      "id": "P003",
+      "name": "DataInsight",
+      "category": "Business Intelligence",
+      "description": "Advanced analytics platform for business intelligence with predictive capabilities.",
+      "launch_date": "2016-03-15",
+      "version": "2.8.3",
+      "pricing_model": "Tiered Subscription",
+      "base_price_cad": 8000,
+      "features": [
+        "Real-time analytics",
+        "Custom dashboards",
+        "Predictive modeling",
+        "Data visualization",
+        "Integration with major data sources",
+        "Automated reporting"
+      ],
+      "customers": 104,
+      "revenue_2023_cad": 2850000,
+      "growth_rate": 0.18
+    },
+    {
+      "id": "P004",
+      "name": "ComplianceGuard",
+      "category": "Regulatory Compliance",
+      "description": "Automated compliance management system for Canadian regulatory requirements.",
+      "launch_date": "2018-09-22",
+      "version": "2.1.5",
+      "pricing_model": "Subscription",
+      "base_price_cad": 12000,
+      "features": [
+        "Regulatory updates",
+        "Compliance assessment",
+        "Documentation management",
+        "Audit preparation",
+        "Risk assessment",
+        "Compliance reporting"
+      ],
+      "customers": 76,
+      "revenue_2023_cad": 2100000,
+      "growth_rate": 0.25
+    },
+    {
+      "id": "P005",
+      "name": "NorthStar CRM",
+      "category": "Customer Relationship Management",
+      "description": "Customer relationship management solution tailored for Canadian businesses.",
+      "launch_date": "2019-06-10",
+      "version": "1.9.2",
+      "pricing_model": "Per-user Subscription",
+      "base_price_cad": 120,
+      "features": [
+        "Contact management",
+        "Sales pipeline tracking",
+        "Marketing automation",
+        "Customer service tools",
+        "Analytics and reporting",
+        "Mobile access"
+      ],
+      "customers": 218,
+      "revenue_2023_cad": 1950000,
+      "growth_rate": 0.31
+    }
+  ],
+  "customers": [
+    {
+      "id": "C001",
+      "name": "Royal Bank of Canada",
+      "industry": "Banking & Finance",
+      "location": "Toronto, Ontario",
+      "size": "Enterprise",
+      "relationship_start": "2014-02-15",
+      "account_manager": "E004",
+      "products": ["P001", "P002", "P004"],
+      "annual_contract_value_cad": 450000,
+      "satisfaction_score": 4.7,
+      "renewal_risk": "Low",
+      "last_interaction": "2024-05-28"
+    },
+    {
+      "id": "C002",
+      "name": "Shopify",
+      "industry": "E-commerce",
+      "location": "Ottawa, Ontario",
+      "size": "Enterprise",
+      "relationship_start": "2015-07-22",
+      "account_manager": "E004",
+      "products": ["P002", "P003"],
+      "annual_contract_value_cad": 325000,
+      "satisfaction_score": 4.8,
+      "renewal_risk": "Low",
+      "last_interaction": "2024-06-01"
+    },
+    {
+      "id": "C003",
+      "name": "Lululemon Athletica",
+      "industry": "Retail",
+      "location": "Vancouver, British Columbia",
+      "size": "Enterprise",
+      "relationship_start": "2016-03-10",
+      "account_manager": "E004",
+      "products": ["P002", "P005"],
+      "annual_contract_value_cad": 210000,
+      "satisfaction_score": 4.5,
+      "renewal_risk": "Medium",
+      "last_interaction": "2024-05-15"
+    },
+    {
+      "id": "C004",
+      "name": "Desjardins Group",
+      "industry": "Financial Services",
+      "location": "Montreal, Quebec",
+      "size": "Enterprise",
+      "relationship_start": "2017-11-05",
+      "account_manager": "E004",
+      "products": ["P001", "P004"],
+      "annual_contract_value_cad": 280000,
+      "satisfaction_score": 4.6,
+      "renewal_risk": "Low",
+      "last_interaction": "2024-05-22"
+    },
+    {
+      "id": "C005",
+      "name": "Manulife Financial",
+      "industry": "Insurance",
+      "location": "Toronto, Ontario",
+      "size": "Enterprise",
+      "relationship_start": "2018-05-17",
+      "account_manager": "E004",
+      "products": ["P001", "P003", "P004"],
+      "annual_contract_value_cad": 375000,
+      "satisfaction_score": 4.4,
+      "renewal_risk": "Medium",
+      "last_interaction": "2024-05-30"
+    },
+    {
+      "id": "C006",
+      "name": "Vidéotron",
+      "industry": "Telecommunications",
+      "location": "Montreal, Quebec",
+      "size": "Enterprise",
+      "relationship_start": "2019-02-28",
+      "account_manager": "E004",
+      "products": ["P002", "P003"],
+      "annual_contract_value_cad": 245000,
+      "satisfaction_score": 4.3,
+      "renewal_risk": "Medium",
+      "last_interaction": "2024-05-10"
+    },
+    {
+      "id": "C007",
+      "name": "Maple Leaf Foods",
+      "industry": "Food Production",
+      "location": "Mississauga, Ontario",
+      "size": "Enterprise",
+      "relationship_start": "2020-06-12",
+      "account_manager": "E007",
+      "products": ["P002", "P005"],
+      "annual_contract_value_cad": 190000,
+      "satisfaction_score": 4.5,
+      "renewal_risk": "Low",
+      "last_interaction": "2024-06-02"
+    },
+    {
+      "id": "C008",
+      "name": "Hootsuite",
+      "industry": "Technology",
+      "location": "Vancouver, British Columbia",
+      "size": "Mid-market",
+      "relationship_start": "2020-09-05",
+      "account_manager": "E007",
+      "products": ["P002", "P003", "P005"],
+      "annual_contract_value_cad": 175000,
+      "satisfaction_score": 4.9,
+      "renewal_risk": "Low",
+      "last_interaction": "2024-05-25"
+    },
+    {
+      "id": "C009",
+      "name": "Laurentian Bank",
+      "industry": "Banking",
+      "location": "Montreal, Quebec",
+      "size": "Enterprise",
+      "relationship_start": "2021-01-20",
+      "account_manager": "E007",
+      "products": ["P001", "P004"],
+      "annual_contract_value_cad": 230000,
+      "satisfaction_score": 4.2,
+      "renewal_risk": "High",
+      "last_interaction": "2024-05-05"
+    },
+    {
+      "id": "C010",
+      "name": "Lightspeed Commerce",
+      "industry": "Technology",
+      "location": "Montreal, Quebec",
+      "size": "Mid-market",
+      "relationship_start": "2021-05-11",
+      "account_manager": "E007",
+      "products": ["P003", "P005"],
+      "annual_contract_value_cad": 145000,
+      "satisfaction_score": 4.7,
+      "renewal_risk": "Low",
+      "last_interaction": "2024-06-01"
+    },
+    {
+      "id": "C011",
+      "name": "ATB Financial",
+      "industry": "Banking",
+      "location": "Edmonton, Alberta",
+      "size": "Mid-market",
+      "relationship_start": "2021-08-17",
+      "account_manager": "E007",
+      "products": ["P001", "P004", "P005"],
+      "annual_contract_value_cad": 195000,
+      "satisfaction_score": 4.6,
+      "renewal_risk": "Low",
+      "last_interaction": "2024-05-28"
+    },
+    {
+      "id": "C012",
+      "name": "Wealthsimple",
+      "industry": "Financial Technology",
+      "location": "Toronto, Ontario",
+      "size": "Mid-market",
+      "relationship_start": "2022-02-09",
+      "account_manager": "E007",
+      "products": ["P001", "P002", "P003"],
+      "annual_contract_value_cad": 210000,
+      "satisfaction_score": 4.8,
+      "renewal_risk": "Low",
+      "last_interaction": "2024-06-03"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "T001",
+      "customer_id": "C001",
+      "date": "2024-01-15",
+      "products": ["P001", "P002", "P004"],
+      "amount_cad": 112500,
+      "type": "Renewal",
+      "payment_method": "Wire Transfer",
+      "status": "Completed"
+    },
+    {
+      "id": "T002",
+      "customer_id": "C002",
+      "date": "2024-02-03",
+      "products": ["P002", "P003"],
+      "amount_cad": 81250,
+      "type": "Renewal",
+      "payment_method": "Credit Card",
+      "status": "Completed"
+    },
+    {
+      "id": "T003",
+      "customer_id": "C003",
+      "date": "2024-02-22",
+      "products": ["P002", "P005"],
+      "amount_cad": 52500,
+      "type": "Renewal",
+      "payment_method": "Wire Transfer",
+      "status": "Completed"
+    },
+    {
+      "id": "T004",
+      "customer_id": "C004",
+      "date": "2024-03-10",
+      "products": ["P001", "P004"],
+      "amount_cad": 70000,
+      "type": "Renewal",
+      "payment_method": "Wire Transfer",
+      "status": "Completed"
+    },
+    {
+      "id": "T005",
+      "customer_id": "C005",
+      "date": "2024-03-25",
+      "products": ["P001", "P003", "P004"],
+      "amount_cad": 93750,
+      "type": "Renewal",
+      "payment_method": "Wire Transfer",
+      "status": "Completed"
+    },
+    {
+      "id": "T006",
+      "customer_id": "C006",
+      "date": "2024-04-05",
+      "products": ["P002", "P003"],
+      "amount_cad": 61250,
+      "type": "Renewal",
+      "payment_method": "Credit Card",
+      "status": "Completed"
+    },
+    {
+      "id": "T007",
+      "customer_id": "C007",
+      "date": "2024-04-18",
+      "products": ["P002", "P005"],
+      "amount_cad": 47500,
+      "type": "Renewal",
+      "payment_method": "Wire Transfer",
+      "status": "Completed"
+    },
+    {
+      "id": "T008",
+      "customer_id": "C008",
+      "date": "2024-05-02",
+      "products": ["P002", "P003", "P005"],
+      "amount_cad": 43750,
+      "type": "Renewal",
+      "payment_method": "Credit Card",
+      "status": "Completed"
+    },
+    {
+      "id": "T009",
+      "customer_id": "C009",
+      "date": "2024-05-15",
+      "products": ["P001", "P004"],
+      "amount_cad": 57500,
+      "type": "Renewal",
+      "payment_method": "Wire Transfer",
+      "status": "Pending"
+    },
+    {
+      "id": "T010",
+      "customer_id": "C010",
+      "date": "2024-05-28",
+      "products": ["P003", "P005"],
+      "amount_cad": 36250,
+      "type": "Renewal",
+      "payment_method": "Credit Card",
+      "status": "Completed"
+    },
+    {
+      "id": "T011",
+      "customer_id": "C011",
+      "date": "2024-06-02",
+      "products": ["P001", "P004", "P005"],
+      "amount_cad": 48750,
+      "type": "Renewal",
+      "payment_method": "Wire Transfer",
+      "status": "Pending"
+    },
+    {
+      "id": "T012",
+      "customer_id": "C012",
+      "date": "2024-06-05",
+      "products": ["P001", "P002", "P003"],
+      "amount_cad": 52500,
+      "type": "Renewal",
+      "payment_method": "Credit Card",
+      "status": "Pending"
+    }
+  ],
+  "financial_metrics": {
+    "yearly_revenue_cad": {
+      "2019": 5200000,
+      "2020": 7800000,
+      "2021": 10500000,
+      "2022": 12900000,
+      "2023": 14850000,
+      "2024_projected": 17820000
+    },
+    "quarterly_revenue_cad": {
+      "2023_Q1": 3450000,
+      "2023_Q2": 3650000,
+      "2023_Q3": 3800000,
+      "2023_Q4": 3950000,
+      "2024_Q1": 4250000,
+      "2024_Q2_projected": 4450000
+    },
+    "expenses_by_category_cad": {
+      "2023": {
+        "Salaries": 6200000,
+        "Research_Development": 2100000,
+        "Marketing": 1500000,
+        "Operations": 1800000,
+        "Administration": 950000,
+        "Other": 350000
+      },
+      "2024_projected": {
+        "Salaries": 7100000,
+        "Research_Development": 2500000,
+        "Marketing": 1800000,
+        "Operations": 2100000,
+        "Administration": 1100000,
+        "Other": 400000
+      }
+    },
+    "profit_margins": {
+      "2019": 0.18,
+      "2020": 0.21,
+      "2021": 0.23,
+      "2022": 0.25,
+      "2023": 0.27,
+      "2024_projected": 0.28
+    },
+    "customer_acquisition_cost_cad": {
+      "2019": 12500,
+      "2020": 13200,
+      "2021": 14000,
+      "2022": 14800,
+      "2023": 15200,
+      "2024_ytd": 15500
+    },
+    "customer_lifetime_value_cad": {
+      "2019": 185000,
+      "2020": 195000,
+      "2021": 210000,
+      "2022": 225000,
+      "2023": 240000,
+      "2024_projected": 255000
+    }
+  },
+  "market_data": {
+    "market_share_percent": {
+      "Data_Security": 8.5,
+      "Cloud_Infrastructure": 6.2,
+      "Business_Intelligence": 5.8,
+      "Regulatory_Compliance": 12.3,
+      "CRM": 4.1
+    },
+    "industry_growth_rates_percent": {
+      "Data_Security": 15.2,
+      "Cloud_Infrastructure": 18.5,
+      "Business_Intelligence": 14.3,
+      "Regulatory_Compliance": 11.8,
+      "CRM": 9.7
+    },
+    "competitor_analysis": [
+      {
+        "name": "TechShield Canada",
+        "primary_product_category": "Data Security",
+        "market_share_percent": 12.3,
+        "strengths": ["Market leader", "Brand recognition", "Large R&D budget"],
+        "weaknesses": ["Higher pricing", "Less Canadian-focused", "Slower innovation cycle"]
+      },
+      {
+        "name": "CloudWave Solutions",
+        "primary_product_category": "Cloud Infrastructure",
+        "market_share_percent": 15.7,
+        "strengths": ["Global presence", "Extensive infrastructure", "Price competitive"],
+        "weaknesses": ["Less focus on Canadian data sovereignty", "Generic solutions", "Lower customer service ratings"]
+      },
+      {
+        "name": "DataVision Analytics",
+        "primary_product_category": "Business Intelligence",
+        "market_share_percent": 10.2,
+        "strengths": ["Advanced analytics", "User-friendly interface", "Strong marketing"],
+        "weaknesses": ["Limited Canadian presence", "Less industry specialization", "Higher implementation costs"]
+      },
+      {
+        "name": "ComplianceFirst",
+        "primary_product_category": "Regulatory Compliance",
+        "market_share_percent": 9.5,
+        "strengths": ["Regulatory expertise", "Comprehensive solution", "Strong customer support"],
+        "weaknesses": ["Limited integration capabilities", "Outdated interface", "Slower update cycle"]
+      }
+    ],
+    "target_industries": [
+      {
+        "name": "Financial Services",
+        "market_size_cad": 4200000000,
+        "growth_rate_percent": 8.5,
+        "key_needs": ["Data security", "Regulatory compliance", "Customer analytics"],
+        "current_penetration_percent": 15.3
+      },
+      {
+        "name": "Healthcare",
+        "market_size_cad": 3100000000,
+        "growth_rate_percent": 12.3,
+        "key_needs": ["Data privacy", "Patient information management", "Regulatory compliance"],
+        "current_penetration_percent": 8.7
+      },
+      {
+        "name": "Retail",
+        "market_size_cad": 2800000000,
+        "growth_rate_percent": 9.8,
+        "key_needs": ["Customer analytics", "Cloud infrastructure", "E-commerce integration"],
+        "current_penetration_percent": 11.2
+      },
+      {
+        "name": "Manufacturing",
+        "market_size_cad": 2500000000,
+        "growth_rate_percent": 7.5,
+        "key_needs": ["Supply chain analytics", "Operational efficiency", "Regulatory compliance"],
+        "current_penetration_percent": 6.8
+      },
+      {
+        "name": "Public Sector",
+        "market_size_cad": 3800000000,
+        "growth_rate_percent": 5.2,
+        "key_needs": ["Data sovereignty", "Security clearance", "Compliance frameworks"],
+        "current_penetration_percent": 9.3
+      }
+    ]
+  },
+  "support_tickets": [
+    {
+      "id": "ST001",
+      "customer_id": "C001",
+      "product_id": "P001",
+      "date_opened": "2024-05-10",
+      "date_closed": "2024-05-12",
+      "status": "Resolved",
+      "priority": "High",
+      "category": "Technical Issue",
+      "description": "Unable to access encryption key management interface",
+      "resolution": "Reset admin permissions and provided updated documentation on key rotation procedures",
+      "satisfaction_score": 4
+    },
+    {
+      "id": "ST002",
+      "customer_id": "C003",
+      "product_id": "P002",
+      "date_opened": "2024-05-15",
+      "date_closed": "2024-05-16",
+      "status": "Resolved",
+      "priority": "Medium",
+      "category": "Feature Request",
+      "description": "Request for additional storage capacity in Vancouver region",
+      "resolution": "Upgraded storage allocation and provided documentation on auto-scaling features",
+      "satisfaction_score": 5
+    },
+    {
+      "id": "ST003",
+      "customer_id": "C005",
+      "product_id": "P003",
+      "date_opened": "2024-05-18",
+      "date_closed": "2024-05-22",
+      "status": "Resolved",
+      "priority": "Medium",
+      "category": "Integration Issue",
+      "description": "Difficulty connecting DataInsight to internal Oracle database",
+      "resolution": "Provided custom connector script and updated integration documentation",
+      "satisfaction_score": 4
+    },
+    {
+      "id": "ST004",
+      "customer_id": "C009",
+      "product_id": "P001",
+      "date_opened": "2024-05-25",
+      "date_closed": null,
+      "status": "In Progress",
+      "priority": "High",
+      "category": "Performance Issue",
+      "description": "Slow response times when accessing encrypted files over 500MB",
+      "resolution": null,
+      "satisfaction_score": null
+    },
+    {
+      "id": "ST005",
+      "customer_id": "C002",
+      "product_id": "P003",
+      "date_opened": "2024-06-01",
+      "date_closed": "2024-06-03",
+      "status": "Resolved",
+      "priority": "Low",
+      "category": "Documentation Request",
+      "description": "Request for updated API documentation for new analytics features",
+      "resolution": "Provided updated documentation and scheduled training session",
+      "satisfaction_score": 5
+    },
+    {
+      "id": "ST006",
+      "customer_id": "C011",
+      "product_id": "P004",
+      "date_opened": "2024-06-04",
+      "date_closed": null,
+      "status": "Open",
+      "priority": "Medium",
+      "category": "Compliance Question",
+      "description": "Inquiry about PIPEDA compliance updates for Alberta operations",
+      "resolution": null,
+      "satisfaction_score": null
+    }
+  ],
+  "documents": [
+    {
+      "id": "D001",
+      "title": "SecureVault Product Manual",
+      "type": "Product Documentation",
+      "format": "PDF",
+      "created_date": "2024-01-15",
+      "last_updated": "2024-04-22",
+      "author": "David Chen",
+      "department": "Technology",
+      "tags": ["security", "encryption", "product manual", "technical documentation"],
+      "version": "4.2",
+      "size_kb": 3850,
+      "access_level": "Public",
+      "url": "https://docs.northerntech.ca/securevault/manual_v4.2.pdf"
+    },
+    {
+      "id": "D002",
+      "title": "Canadian Data Residency Compliance Guide",
+      "type": "White Paper",
+      "format": "PDF",
+      "created_date": "2023-11-10",
+      "last_updated": "2024-03-15",
+      "author": "Sarah Johnson",
+      "department": "Finance",
+      "tags": ["compliance", "data residency", "PIPEDA", "regulatory", "white paper"],
+      "version": "2.1",
+      "size_kb": 2450,
+      "access_level": "Public",
+      "url": "https://docs.northerntech.ca/whitepapers/data_residency_guide_v2.1.pdf"
+    },
+    {
+      "id": "D003",
+      "title": "Northern Tech Solutions Company Overview",
+      "type": "Corporate Document",
+      "format": "PDF",
+      "created_date": "2024-02-05",
+      "last_updated": "2024-02-05",
+      "author": "Priya Sharma",
+      "department": "Marketing",
+      "tags": ["company", "overview", "corporate", "profile"],
+      "version": "1.0",
+      "size_kb": 1850,
+      "access_level": "Public",
+      "url": "https://www.northerntech.ca/company/overview.pdf"
+    },
+    {
+      "id": "D004",
+      "title": "2023 Annual Financial Report",
+      "type": "Financial Document",
+      "format": "PDF",
+      "created_date": "2024-03-30",
+      "last_updated": "2024-03-30",
+      "author": "Sarah Johnson",
+      "department": "Finance",
+      "tags": ["financial", "annual report", "2023", "revenue", "confidential"],
+      "version": "1.0",
+      "size_kb": 4200,
+      "access_level": "Confidential",
+      "url": "https://internal.northerntech.ca/finance/annual_report_2023.pdf"
+    },
+    {
+      "id": "D005",
+      "title": "DataInsight Implementation Guide",
+      "type": "Technical Documentation",
+      "format": "PDF",
+      "created_date": "2023-09-15",
+      "last_updated": "2024-05-10",
+      "author": "Michael Wong",
+      "department": "Technology",
+      "tags": ["implementation", "technical", "data analytics", "guide"],
+      "version": "3.2",
+      "size_kb": 5100,
+      "access_level": "Customer",
+      "url": "https://docs.northerntech.ca/datainsight/implementation_v3.2.pdf"
+    },
+    {
+      "id": "D006",
+      "title": "Canadian Privacy Law Updates 2024",
+      "type": "Legal Document",
+      "format": "PDF",
+      "created_date": "2024-04-05",
+      "last_updated": "2024-05-20",
+      "author": "External Legal Counsel",
+      "department": "Legal",
+      "tags": ["legal", "privacy", "compliance", "regulatory", "PIPEDA"],
+      "version": "1.1",
+      "size_kb": 1850,
+      "access_level": "Internal",
+      "url": "https://internal.northerntech.ca/legal/privacy_law_updates_2024.pdf"
+    },
+    {
+      "id": "D007",
+      "title": "Customer Success Playbook",
+      "type": "Internal Document",
+      "format": "PDF",
+      "created_date": "2023-12-10",
+      "last_updated": "2024-02-28",
+      "author": "Emily Lavoie",
+      "department": "Customer Service",
+      "tags": ["customer success", "playbook", "internal", "procedures"],
+      "version": "2.3",
+      "size_kb": 3200,
+      "access_level": "Internal",
+      "url": "https://internal.northerntech.ca/customer_success/playbook_v2.3.pdf"
+    },
+    {
+      "id": "D008",
+      "title": "AI and Machine Learning Roadmap",
+      "type": "Strategic Document",
+      "format": "PDF",
+      "created_date": "2024-01-25",
+      "last_updated": "2024-04-15",
+      "author": "Ahmed Hassan",
+      "department": "Technology",
+      "tags": ["AI", "machine learning", "roadmap", "strategy", "confidential"],
+      "version": "1.2",
+      "size_kb": 2750,
+      "access_level": "Confidential",
+      "url": "https://internal.northerntech.ca/strategy/ai_ml_roadmap_v1.2.pdf"
+    }
+  ]
+}

@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northern Tech Solutions - Canadian AI Enterprise Search</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-red: #e63946;
+            --primary-white: #f1faee;
+            --primary-light-blue: #a8dadc;
+            --primary-blue: #457b9d;
+            --primary-dark-blue: #1d3557;
+            --compliant-green: #2a9d8f;
+            --warning-yellow: #e9c46a;
+            --danger-red: #e76f51;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #dee2e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary-dark-blue);
+            margin-left: 10px;
+        }
+
+        .maple-leaf {
+            color: var(--primary-red);
+            font-size: 24px;
+        }
+
+        .compliance-indicator {
+            display: flex;
+            align-items: center;
+            background-color: var(--compliant-green);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .shield-icon {
+            margin-right: 8px;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            background-color: transparent;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .tab.active {
+            background-color: var(--card-bg);
+            border-color: var(--border-color);
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--primary-blue);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            color: var(--primary-dark-blue);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-title i {
+            margin-right: 8px;
+        }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+        }
+
+        /* Document Library */
+        .document-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .document-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .document-item:hover {
+            background-color: rgba(168, 218, 220, 0.1);
+        }
+
+        .document-item.active {
+            background-color: rgba(168, 218, 220, 0.2);
+            border-left: 3px solid var(--primary-blue);
+        }
+
+        .document-icon {
+            margin-right: 10px;
+            color: var(--primary-blue);
+        }
+
+        .document-info {
+            flex: 1;
+        }
+
+        .document-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .document-meta {
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .document-type {
+            background-color: var(--primary-light-blue);
+            color: var(--primary-dark-blue);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .document-status {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .status-icon {
+            margin-right: 5px;
+            color: var(--compliant-green);
+        }
+
+        .status-text {
+            color: var(--compliant-green);
+        }
+
+        /* Document Preview */
+        .document-preview {
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            margin-top: 15px;
+        }
+
+        .document-tags {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .document-tag {
+            background-color: var(--primary-light-blue);
+            color: var(--primary-dark-blue);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+        }
+
+        /* Chat Interface */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .chat-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-dark-blue);
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-title i {
+            margin-right: 10px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 15px;
+            height: 300px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 15px;
+            border-radius: 18px;
+            line-height: 1.4;
+            position: relative;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: var(--primary-blue);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .ai-message {
+            align-self: flex-start;
+            background-color: #f0f0f0;
+            color: var(--text-color);
+            border-bottom-left-radius: 5px;
+        }
+
+        .message-source {
+            font-size: 11px;
+            color: rgba(0, 0, 0, 0.5);
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .chat-input-container {
+            display: flex;
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            overflow: hidden;
+            padding: 5px;
+        }
+
+        .chat-input {
+            flex: 1;
+            border: none;
+            padding: 10px 15px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .send-button {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .send-icon {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        /* Memory System */
+        .memory-indicator {
+            display: flex;
+            align-items: center;
+            background-color: var(--primary-light-blue);
+            color: var(--primary-dark-blue);
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .memory-count {
+            background-color: var(--primary-blue);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        .memory-panel {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .memory-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-dark-blue);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .memory-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .memory-item {
+            background-color: rgba(168, 218, 220, 0.2);
+            border: 1px solid var(--primary-light-blue);
+            border-radius: 15px;
+            padding: 5px 10px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            color: var(--primary-dark-blue);
+        }
+
+        .memory-item i {
+            margin-right: 5px;
+        }
+
+        .memory-clear {
+            background-color: transparent;
+            border: none;
+            color: var(--primary-blue);
+            font-size: 12px;
+            cursor: pointer;
+            padding: 2px 5px;
+        }
+
+        .highlight {
+            background-color: rgba(233, 196, 106, 0.3);
+            padding: 2px 0;
+        }
+
+        /* Charts & Analytics */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .metric-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-dark-blue);
+            margin: 10px 0;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .metric-trend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .trend-up {
+            color: var(--compliant-green);
+        }
+
+        .trend-down {
+            color: var(--danger-red);
+        }
+
+        .chart-container {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-dark-blue);
+        }
+
+        .chart {
+            height: 250px;
+            position: relative;
+            margin-top: 20px;
+            border-bottom: 1px solid var(--border-color);
+            border-left: 1px solid var(--border-color);
+        }
+
+        .chart-bar {
+            position: absolute;
+            bottom: 0;
+            width: 30px;
+            background-color: var(--primary-blue);
+            border-radius: 4px 4px 0 0;
+            transition: height 0.5s ease;
+        }
+
+        .chart-bar-label {
+            position: absolute;
+            bottom: -25px;
+            width: 60px;
+            text-align: center;
+            font-size: 12px;
+            transform: translateX(-15px);
+        }
+
+        .chart-bar-value {
+            position: absolute;
+            top: -20px;
+            width: 60px;
+            text-align: center;
+            font-size: 12px;
+            transform: translateX(-15px);
+        }
+
+        .chart-line {
+            position: relative;
+            height: 250px;
+            margin-top: 20px;
+            border-bottom: 1px solid var(--border-color);
+            border-left: 1px solid var(--border-color);
+        }
+
+        .chart-point {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-blue);
+            border-radius: 50%;
+            transform: translate(-4px, -4px);
+        }
+
+        .chart-line-path {
+            stroke: var(--primary-blue);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .chart-area-path {
+            fill: rgba(69, 123, 157, 0.1);
+            stroke: none;
+        }
+
+        .chart-forecast-path {
+            stroke: var(--primary-red);
+            stroke-width: 2;
+            stroke-dasharray: 5,5;
+            fill: none;
+        }
+
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            margin-right: 5px;
+            border-radius: 2px;
+        }
+
+        .canadian-theme {
+            border-top: 3px solid var(--primary-red);
+            position: relative;
+        }
+
+        .canadian-theme::before {
+            content: "🍁";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 20px;
+        }
+
+        /* Model Selector */
+        .model-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .model-selector label {
+            margin-right: 10px;
+            font-size: 14px;
+            color: var(--primary-dark-blue);
+            font-weight: 600;
+        }
+
+        .model-selector select {
+            padding: 5px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-size: 14px;
+        }
+
+        /* Document Upload */
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        .upload-icon {
+            font-size: 30px;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .upload-text {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .processing-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background-color: rgba(168, 218, 220, 0.2);
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .processing-text {
+            font-size: 14px;
+            color: var(--primary-dark-blue);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="maple-leaf">🍁</span>
+                <h1>Northern Tech Solutions</h1>
+            </div>
+            <div class="compliance-indicator">
+                <span class="shield-icon">🛡️</span>
+                <span>Canadian Data Compliant</span>
+            </div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="documents">Document Assistant</button>
+            <button class="tab" data-tab="analytics">Data Analytics</button>
+        </div>
+
+        <!-- Document Assistant Tab -->
+        <div class="tab-content active" id="documents-tab">
+            <div class="dashboard">
+                <div class="sidebar">
+                    <div class="card canadian-theme">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="document-icon">📁</span> Document Library
+                            </div>
+                        </div>
+                        <div class="document-library">
+                            <ul class="document-list" id="document-list">
+                                <li class="document-item active" data-id="D001">
+                                    <span class="document-icon">📄</span>
+                                    <div class="document-info">
+                                        <div class="document-title">SecureVault Product Manual</div>
+                                        <div class="document-meta">
+                                            <span>Apr 22, 2025</span>
+                                            <span class="document-type">PDF</span>
+                                        </div>
+                                        <div class="document-status">
+                                            <span class="status-icon">✓</span>
+                                            <span class="status-text">Canadian Hosted</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="document-item" data-id="D002">
+                                    <span class="document-icon">📄</span>
+                                    <div class="document-info">
+                                        <div class="document-title">Canadian Data Residency Guide</div>
+                                        <div class="document-meta">
+                                            <span>Mar 15, 2025</span>
+                                            <span class="document-type">PDF</span>
+                                        </div>
+                                        <div class="document-status">
+                                            <span class="status-icon">✓</span>
+                                            <span class="status-text">Canadian Hosted</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="document-item" data-id="D003">
+                                    <span class="document-icon">📄</span>
+                                    <div class="document-info">
+                                        <div class="document-title">Company Overview</div>
+                                        <div class="document-meta">
+                                            <span>Feb 5, 2025</span>
+                                            <span class="document-type">PDF</span>
+                                        </div>
+                                        <div class="document-status">
+                                            <span class="status-icon">✓</span>
+                                            <span class="status-text">Canadian Hosted</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card canadian-theme">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="upload-icon">📤</span> Add New Document
+                            </div>
+                        </div>
+                        <div class="upload-area" id="upload-area">
+                            <span class="upload-icon">📤</span>
+                            <div class="upload-text">Drag & drop files here or click to browse</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="main-content">
+                    <div class="card canadian-theme">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="document-icon">📄</span> <span id="preview-title">SecureVault Product Manual</span>
+                            </div>
+                        </div>
+                        <div class="document-tags" id="document-tags">
+                            <span class="document-tag">security</span>
+                            <span class="document-tag">encryption</span>
+                            <span class="document-tag">product manual</span>
+                            <span class="document-tag">technical documentation</span>
+                        </div>
+                        <div class="document-preview" id="document-preview">
+                            <h2>SecureVault 4.2 - Enterprise Security Solution</h2>
+                            <p><strong>Version:</strong> 4.2.1</p>
+                            <p><strong>Last Updated:</strong> April 22, 2025</p>
+                            <p><strong>Author:</strong> David Chen, CTO</p>
+                            
+                            <h3>1. Introduction</h3>
+                            <p>SecureVault is Northern Tech Solutions' flagship enterprise-grade data encryption and security solution designed specifically for Canadian organizations requiring strict data residency compliance. This manual provides comprehensive guidance on installation, configuration, and operation of SecureVault 4.2.</p>
+                            
+                            <h3>2. Key Features</h3>
+                            <ul>
+                                <li><strong>End-to-end encryption</strong> using AES-256 and RSA-4096 algorithms</li>
+                                <li><strong>Canadian data residency</strong> with geo-fencing capabilities</li>
+                                <li><strong>PIPEDA compliance</strong> frameworks and automatic reporting</li>
+                                <li><strong>Access control management</strong> with role-based permissions</li>
+                                <li><strong>Comprehensive audit logging</strong> for security monitoring</li>
+                                <li><strong>Advanced threat detection</strong> with AI-powered anomaly identification</li>
+                            </ul>
+                            
+                            <h3>3. Canadian Data Residency</h3>
+                            <p>SecureVault ensures all data remains within Canadian borders through our network of data centers in Toronto, Montreal, Vancouver, and Calgary. The solution implements geo-fencing technology that prevents data from being transferred outside Canadian jurisdiction, ensuring compliance with data sovereignty requirements.</p>
+                        </div>
+                    </div>
+
+                    <div class="card canadian-theme">
+                        <div class="chat-container">
+                            <div class="chat-header">
+                                <div class="chat-title">
+                                    <span>🤖</span> AI Document Assistant
+                                    <div class="compliance-indicator" style="font-size: 12px; padding: 4px 8px; margin-left: 10px;">
+                                        <span class="shield-icon">🛡️</span>
+                                        <span>Canadian LLM</span>
+                                    </div>
+                                </div>
+                                <div class="memory-indicator">
+                                    <span>Memory Active</span>
+                                    <span class="memory-count" id="memory-count">3</span>
+                                </div>
+                            </div>
+
+                            <div class="model-selector">
+                                <label for="llm-model">AI Model:</label>
+                                <select id="llm-model">
+                                    <option value="gpt4o">GPT-4o (OpenAI)</option>
+                                    <option value="claude">Claude 3 (Anthropic)</option>
+                                    <option value="deepseek">DeepSeek (Canadian)</option>
+                                </select>
+                            </div>
+
+                            <div class="chat-messages" id="chat-messages">
+                                <div class="message ai-message">
+                                    <p>👋 Hello! I'm your AI document assistant for Northern Tech Solutions. I can help you explore our document library, answer questions about specific documents, and provide insights based on our company's knowledge base.</p>
+                                    <p>All processing occurs in Canadian data centers in compliance with privacy regulations. What would you like to know about our documents?</p>
+                                </div>
+                            </div>
+
+                            <div class="chat-input-container">
+                                <input type="text" class="chat-input" id="chat-input" placeholder="Ask about documents, products, or company information..." />
+                                <button class="send-button" id="send-button">
+                                    <svg class="send-icon" viewBox="0 0 24 24">
+                                        <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="memory-panel">
+                                <div class="memory-title">
+                                    <span>🧠 Conversation Memory</span>
+                                    <button class="memory-clear" id="clear-memory">Clear Memory</button>
+                                </div>
+                                <div class="memory-items" id="memory-items">
+                                    <div class="memory-item"><span>📄</span> SecureVault Manual</div>
+                                    <div class="memory-item"><span>🔒</span> Data Encryption</div>
+                                    <div class="memory-item"><span>✓</span> PIPEDA Compliance</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Analytics Tab -->
+        <div class="tab-content" id="analytics-tab">
+            <div class="metrics">
+                <div class="metric-card">
+                    <div class="metric-label">Total Revenue (YTD)</div>
+                    <div class="metric-value">$8.7M</div>
+                    <div class="metric-trend">
+                        <span class="trend-up">↑ 12.4% vs. Last Year</span>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Active Customers</div>
+                    <div class="metric-value">142</div>
+                    <div class="metric-trend">
+                        <span class="trend-up">↑ 8.3% vs. Last Year</span>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Customer Satisfaction</div>
+                    <div class="metric-value">4.7/5</div>
+                    <div class="metric-trend">
+                        <span class="trend-up">↑ 0.2 vs. Last Year</span>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Avg Contract Value</div>
+                    <div class="metric-value">$248K</div>
+                    <div class="metric-trend">
+                        <span class="trend-up">↑ 5.2% vs. Last Year</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container canadian-theme">
+                <div class="chart-header">
+                    <div class="chart-title">Revenue Trends & Forecast</div>
+                </div>
+                <div class="chart-line" id="revenue-chart">
+                    <!-- SVG chart will be inserted here by JavaScript -->
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: var(--primary-blue);"></div>
+                        <span>Actual Revenue</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: var(--primary-red);"></div>
+                        <span>Forecasted Revenue</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container canadian-theme">
+                <div class="chart-header">
+                    <div class="chart-title">Product Performance</div>
+                </div>
+                <div class="chart" id="product-chart">
+                    <!-- Bars will be inserted here by JavaScript -->
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: var(--primary-blue);"></div>
+                        <span>Revenue (CAD)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card canadian-theme">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <div class="chat-title">
+                            <span>🤖</span> AI Data Assistant
+                            <div class="compliance-indicator" style="font-size: 12px; padding: 4px 8px; margin-left: 10px;">
+                                <span class="shield-icon">🛡️</span>
+                                <span>Canadian LLM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="data-chat-messages">
+                        <div class="message ai-message">
+                            <p>👋 Hello! I'm your AI data assistant for Northern Tech Solutions. I can help you explore company data, analyze trends, and answer questions about our business performance.</p>
+                            <p>All data processing occurs in Canadian data centers in compliance with privacy regulations. What would you like to know?</p>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" id="data-chat-input" placeholder="Ask about company data, trends, or insights..." />
+                        <button class="send-button" id="data-send-button">
+                            <svg class="send-icon" viewBox="0 0 24 24">
+                                <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab Navigation
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to selected tab and content
+                    this.classList.add('active');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+
+            // Document Library Functionality
+            const documentItems = document.querySelectorAll('.document-item');
+            const documentPreview = document.getElementById('document-preview');
+            const previewTitle = document.getElementById('preview-title');
+            const documentTags = document.getElementById('document-tags');
+            
+            // Document data
+            const documents = {
+                'D001': {
+                    title: 'SecureVault Product Manual',
+                    date: 'Apr 22, 2025',
+                    type: 'PDF',
+                    tags: ['security', 'encryption', 'product manual', 'technical documentation'],
+                    content: `
+                        <h2>SecureVault 4.2 - Enterprise Security Solution</h2>
+                        <p><strong>Version:</strong> 4.2.1</p>
+                        <p><strong>Last Updated:</strong> April 22, 2025</p>
+                        <p><strong>Author:</strong> David Chen, CTO</p>
+                        
+                        <h3>1. Introduction</h3>
+                        <p>SecureVault is Northern Tech Solutions' flagship enterprise-grade data encryption and security solution designed specifically for Canadian organizations requiring strict data residency compliance. This manual provides comprehensive guidance on installation, configuration, and operation of SecureVault 4.2.</p>
+                        
+                        <h3>2. Key Features</h3>
+                        <ul>
+                            <li><strong>End-to-end encryption</strong> using AES-256 and RSA-4096 algorithms</li>
+                            <li><strong>Canadian data residency</strong> with geo-fencing capabilities</li>
+                            <li><strong>PIPEDA compliance</strong> frameworks and automatic reporting</li>
+                            <li><strong>Access control management</strong> with role-based permissions</li>
+                            <li><strong>Comprehensive audit logging</strong> for security monitoring</li>
+                            <li><strong>Advanced threat detection</strong> with AI-powered anomaly identification</li>
+                        </ul>
+                        
+                        <h3>3. Canadian Data Residency</h3>
+                        <p>SecureVault ensures all data remains within Canadian borders through our network of data centers in Toronto, Montreal, Vancouver, and Calgary. The solution implements geo-fencing technology that prevents data from being transferred outside Canadian jurisdiction, ensuring compliance with data sovereignty requirements.</p>
+                    `
+                },
+                'D002': {
+                    title: 'Canadian Data Residency Guide',
+                    date: 'Mar 15, 2025',
+                    type: 'PDF',
+                    tags: ['compliance', 'data residency', 'PIPEDA', 'regulatory', 'white paper'],
+                    content: `
+                        <h2>Canadian Data Residency Compliance Guide</h2>
+                        <p><strong>Version:</strong> 2.1</p>
+                        <p><strong>Last Updated:</strong> March 15, 2025</p>
+                        <p><strong>Author:</strong> Sarah Johnson, CFO</p>
+                        
+                        <h3>1. Introduction to Data Residency</h3>
+                        <p>Data residency refers to the geographic location where an organization's data is stored and processed. In Canada, data residency requirements are governed by federal and provincial privacy laws that mandate certain types of data must remain within Canadian borders.</p>
+                        
+                        <h3>2. Key Canadian Privacy Legislation</h3>
+                        <ul>
+                            <li><strong>PIPEDA (Personal Information Protection and Electronic Documents Act)</strong> - Federal legislation governing the collection, use, and disclosure of personal information</li>
+                            <li><strong>Provincial Privacy Laws</strong> - Including PIPA (BC, Alberta), PHIPA (Ontario), and Act respecting the protection of personal information in the private sector (Quebec)</li>
+                            <li><strong>CPPA (Consumer Privacy Protection Act)</strong> - Pending legislation that will replace PIPEDA with stronger enforcement mechanisms</li>
+                        </ul>
+                        
+                        <h3>3. Data Residency Requirements</h3>
+                        <p>Organizations operating in Canada must adhere to the following data residency requirements:</p>
+                        <ul>
+                            <li>Personal health information must be stored and processed within Canadian borders</li>
+                            <li>Public sector data must remain in Canada unless explicit exemptions are granted</li>
+                            <li>Financial institutions must maintain customer records within Canada</li>
+                            <li>Quebec's Law 25 requires explicit consent for personal information transferred outside Quebec</li>
+                        </ul>
+                    `
+                },
+                'D003': {
+                    title: 'Company Overview',
+                    date: 'Feb 5, 2025',
+                    type: 'PDF',
+                    tags: ['company', 'overview', 'corporate', 'profile'],
+                    content: `
+                        <h2>Northern Tech Solutions - Company Overview</h2>
+                        <p><strong>Version:</strong> 1.0</p>
+                        <p><strong>Last Updated:</strong> February 5, 2025</p>
+                        <p><strong>Author:</strong> Priya Sharma, VP of Marketing</p>
+                        
+                        <h3>1. About Northern Tech Solutions</h3>
+                        <p>Northern Tech Solutions is a Canadian technology company founded in 2011 and headquartered in Toronto, Ontario. We specialize in providing innovative technology solutions with a focus on data security, cloud infrastructure, business intelligence, and regulatory compliance for Canadian organizations.</p>
+                        
+                        <h3>2. Our Mission</h3>
+                        <p>Empowering Canadian businesses with innovative technology solutions while maintaining the highest standards of data privacy and security.</p>
+                        
+                        <h3>3. Leadership Team</h3>
+                        <ul>
+                            <li><strong>Marie Tremblay</strong> - Chief Executive Officer</li>
+                            <li><strong>David Chen</strong> - Chief Technology Officer</li>
+                            <li><strong>Sarah Johnson</strong> - Chief Financial Officer</li>
+                            <li><strong>Jean Bouchard</strong> - VP of Sales</li>
+                            <li><strong>Priya Sharma</strong> - VP of Marketing</li>
+                        </ul>
+                    `
+                },
+                'D007': {
+                    title: 'AI Integration Whitepaper',
+                    date: 'June 6, 2025',
+                    type: 'PDF',
+                    tags: ['AI', 'machine learning', 'integration', 'white paper', 'technical'],
+                    content: `
+                        <h2>AI Integration Whitepaper</h2>
+                        <p><strong>Version:</strong> 1.0</p>
+                        <p><strong>Last Updated:</strong> June 6, 2025</p>
+                        <p><strong>Author:</strong> Ahmed Hassan, Lead Data Scientist</p>
+                        
+                        <h3>1. Introduction to AI Integration</h3>
+                        <p>This whitepaper explores best practices for integrating artificial intelligence capabilities into existing enterprise systems. It focuses specifically on Canadian regulatory requirements and privacy-preserving AI implementation strategies.</p>
+                        
+                        <h3>2. Canadian AI Regulatory Landscape</h3>
+                        <p>Canada has developed a unique approach to AI regulation that balances innovation with ethical considerations:</p>
+                        <ul>
+                            <li>Artificial Intelligence and Data Act (AIDA) requirements for high-impact AI systems</li>
+                            <li>Provincial regulations affecting AI deployment in regulated industries</li>
+                            <li>Ethical AI frameworks developed by the Canadian government</li>
+                            <li>Cross-border data considerations for AI training and inference</li>
+                        </ul>
+                    `
+                }
+            };
+
+            documentItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all items
+                    documentItems.forEach(doc => doc.classList.remove('active'));
+                    
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    // Update document preview
+                    const docId = this.getAttribute('data-id');
+                    updateDocumentPreview(docId);
+                    
+                    // Add to memory
+                    addToMemory('document', documents[docId].title);
+                });
+            });
+
+            function updateDocumentPreview(docId) {
+                const doc = documents[docId];
+                if (doc) {
+                    previewTitle.textContent = doc.title;
+                    documentPreview.innerHTML = doc.content;
+                    
+                    // Update tags
+                    documentTags.innerHTML = '';
+                    doc.tags.forEach(tag => {
+                        const tagSpan = document.createElement('span');
+                        tagSpan.className = 'document-tag';
+                        tagSpan.textContent = tag;
+                        documentTags.appendChild(tagSpan);
+                    });
+                }
+            }
+
+            // Upload Area Functionality
+            const uploadArea = document.getElementById('upload-area');
+            
+            uploadArea.addEventListener('click', function() {
+                simulateFileUpload('New Document.pdf');
+            });
+            
+            uploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.style.borderColor = 'var(--primary-blue)';
+                this.style.backgroundColor = 'rgba(168, 218, 220, 0.1)';
+            });
+            
+            uploadArea.addEventListener('dragleave', function() {
+                this.style.borderColor = 'var(--border-color)';
+                this.style.backgroundColor = 'transparent';
+            });
+            
+            uploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.style.borderColor = 'var(--border-color)';
+                this.style.backgroundColor = 'transparent';
+                
+                simulateFileUpload('Dropped Document.pdf');
+            });
+            
+            function simulateFileUpload(fileName) {
+                // Create processing indicator
+                const processingDiv = document.createElement('div');
+                processingDiv.className = 'processing-indicator';
+                processingDiv.innerHTML = `
+                    <span class="loader"></span>
+                    <span class="processing-text">Processing ${fileName}...</span>
+                `;
+                
+                // Add to document list area
+                const documentList = document.getElementById('document-list');
+                documentList.insertAdjacentElement('afterbegin', processingDiv);
+                
+                // Simulate processing delay
+                setTimeout(() => {
+                    // Remove processing indicator
+                    processingDiv.remove();
+                    
+                    // Add new document to library
+                    const newDocItem = document.createElement('li');
+                    newDocItem.className = 'document-item';
+                    newDocItem.setAttribute('data-id', 'D007');
+                    newDocItem.innerHTML = `
+                        <span class="document-icon">📄</span>
+                        <div class="document-info">
+                            <div class="document-title">AI Integration Whitepaper</div>
+                            <div class="document-meta">
+                                <span>June 6, 2025</span>
+                                <span class="document-type">PDF</span>
+                            </div>
+                            <div class="document-status">
+                                <span class="status-icon">✓</span>
+                                <span class="status-text">Canadian Hosted</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Add to document list
+                    documentList.insertBefore(newDocItem, documentList.firstChild);
+                    
+                    // Add event listener to new document
+                    newDocItem.addEventListener('click', function() {
+                        documentItems.forEach(doc => doc.classList.remove('active'));
+                        this.classList.add('active');
+                        updateDocumentPreview('D007');
+                        addToMemory('document', 'AI Integration Whitepaper');
+                    });
+                    
+                    // Add AI message about the new document
+                    addMessage(`I've processed the new document "AI Integration Whitepaper". It contains information about AI integration best practices for Canadian organizations, privacy-preserving AI techniques, and regulatory compliance. Would you like me to summarize its key points?`, 'ai');
+                }, 2000);
+            }
+
+            // Chat Functionality
+            const chatInput = document.getElementById('chat-input');
+            const sendButton = document.getElementById('send-button');
+            const chatMessages = document.getElementById('chat-messages');
+            const clearMemoryButton = document.getElementById('clear-memory');
+            const modelSelector = document.getElementById('llm-model');
+            
+            // Data Chat
+            const dataChatInput = document.getElementById('data-chat-input');
+            const dataSendButton = document.getElementById('data-send-button');
+            const dataChatMessages = document.getElementById('data-chat-messages');
+
+            // Chat Memory System
+            let chatMemory = [
+                { type: 'document', value: 'SecureVault Manual' },
+                { type: 'concept', value: 'Data Encryption' },
+                { type: 'concept', value: 'PIPEDA Compliance' }
+            ];
+
+            // Predefined responses
+            const responses = {
+                'securevault': "SecureVault is our flagship enterprise-grade data encryption and security solution designed specifically for Canadian organizations requiring strict data residency compliance. It features end-to-end encryption using AES-256 and RSA-4096 algorithms, Canadian data residency with geo-fencing capabilities, PIPEDA compliance frameworks, access control management, comprehensive audit logging, and advanced threat detection. All data remains within Canadian borders through our network of data centers in Toronto, Montreal, Vancouver, and Calgary.",
+                'data residency': "Data residency refers to the geographic location where an organization's data is stored and processed. In Canada, data residency requirements are governed by federal and provincial privacy laws that mandate certain types of data must remain within Canadian borders. Our solutions ensure all customer data is stored exclusively in Canadian data centers in compliance with PIPEDA, provincial privacy laws, and industry-specific regulations.",
+                'pipeda': "PIPEDA (Personal Information Protection and Electronic Documents Act) is federal legislation governing the collection, use, and disclosure of personal information in Canada. Our products are designed to help organizations maintain PIPEDA compliance through data residency controls, consent management, and comprehensive audit trails. The CPPA (Consumer Privacy Protection Act) is set to replace PIPEDA with stronger enforcement mechanisms including administrative monetary penalties up to $10 million or 3% of global revenue.",
+                'company': "Northern Tech Solutions is a proudly Canadian company headquartered in Toronto with offices in Montreal, Vancouver, and Calgary. We maintain all customer data within Canadian borders through our network of Canadian data centers. Our solutions are specifically designed to meet Canadian regulatory requirements including PIPEDA, provincial privacy laws, and industry-specific regulations.",
+                'ai': "Our AI integration platform offers several key advantages for Canadian organizations including exclusively Canadian-hosted infrastructure for model training and deployment, pre-built compliance frameworks for regulated industries, privacy-preserving AI techniques built into the platform, comprehensive audit trails for regulatory reporting, and integration with existing Northern Tech Solutions products. We recommend privacy-preserving techniques such as federated learning, differential privacy, and homomorphic encryption to maintain compliance with Canadian privacy laws.",
+                'revenue': "Based on our financial data, Northern Tech Solutions has seen steady revenue growth over the past 5 years. In 2023, we achieved $14.85M in revenue, a 15% increase from 2022. Our Q1 2024 revenue was $4.25M, up 23% from Q1 2023. The AI model predicts we'll reach approximately $17.82M by the end of 2024, representing a 20% YoY growth.",
+                'customers': "We currently have 142 active customers across Canada. The majority are in Ontario and Quebec, with Banking & Finance being our largest customer segment. Our customer satisfaction score is 4.7/5, which has improved by 0.2 points compared to last year."
+            };
+
+            // Data chat responses
+            const dataResponses = {
+                'revenue': "Based on our financial data, Northern Tech Solutions has seen steady revenue growth over the past 5 years. In 2023, we achieved $14.85M in revenue, a 15% increase from 2022. Our Q1 2024 revenue was $4.25M, up 23% from Q1 2023. The AI model predicts we'll reach approximately $17.82M by the end of 2024, representing a 20% YoY growth.",
+                'products': "Our top performing product is CloudNorth with $4.75M in revenue and 22% growth rate. SecureVault follows with $3.25M and 15% growth. The fastest growing product is NorthStar CRM at 31% growth rate, though it has the lowest revenue at $1.95M currently.",
+                'customers': "We currently have 142 active customers across Canada. The majority are in Ontario and Quebec, with Banking & Finance being our largest customer segment. Our customer satisfaction score is 4.7/5, which has improved by 0.2 points compared to last year.",
+                'forecast': "Our AI models predict 18.3% revenue growth over the next 12 months with high confidence (89%). CloudNorth is expected to be our top growth product. We're also projecting significant expansion in the Healthcare sector, though this prediction has medium confidence (76%) due to regulatory uncertainties.",
+                'market': "Northern Tech Solutions has the strongest market position in Regulatory Compliance with 12.3% market share. Our main competitor is TechShield Canada in the Data Security space, where they hold 12.3% market share compared to our 8.5%. The fastest growing market segment is Cloud Infrastructure at 18.5% industry growth rate."
+            };
+
+            // Add event listeners for chat
+            sendButton.addEventListener('click', function() {
+                sendMessage(chatInput, chatMessages, responses);
+            });
+            
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage(chatInput, chatMessages, responses);
+                }
+            });
+            
+            // Add event listeners for data chat
+            dataSendButton.addEventListener('click', function() {
+                sendMessage(dataChatInput, dataChatMessages, dataResponses);
+            });
+            
+            dataChatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage(dataChatInput, dataChatMessages, dataResponses);
+                }
+            });
+            
+            // Clear memory button
+            clearMemoryButton.addEventListener('click', function() {
+                chatMemory = [];
+                updateMemoryDisplay();
+                addMessage("Memory cleared. I've forgotten our previous conversation context.", 'ai', chatMessages);
+            });
+            
+            // Model selector change event
+            modelSelector.addEventListener('change', function() {
+                const model = this.value;
+                let message = "";
+                
+                switch(model) {
+                    case 'gpt4o':
+                        message = "Switched to OpenAI GPT-4o model. This model provides strong reasoning capabilities with balanced performance.";
+                        break;
+                    case 'claude':
+                        message = "Switched to Anthropic Claude 3 model. This model excels at nuanced understanding and detailed explanations.";
+                        break;
+                    case 'deepseek':
+                        message = "Switched to DeepSeek Canadian model. This model is hosted entirely within Canadian data centers for maximum data sovereignty.";
+                        break;
+                }
+                
+                addMessage(message, 'ai', chatMessages);
+            });
+
+            function sendMessage(inputElement, messagesContainer, responseDict) {
+                const message = inputElement.value.trim();
+                if (message === '') return;
+
+                // Add user message
+                addMessage(message, 'user', messagesContainer);
+                inputElement.value = '';
+
+                // Simulate AI thinking
+                setTimeout(() => {
+                    // Add typing indicator
+                    const typingIndicator = document.createElement('div');
+                    typingIndicator.className = 'message ai-message';
+                    typingIndicator.id = 'typing-indicator';
+                    typingIndicator.innerHTML = '<span class="loader"></span> Processing...';
+                    messagesContainer.appendChild(typingIndicator);
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+                    // Generate response after delay
+                    setTimeout(() => {
+                        // Remove typing indicator
+                        const indicator = document.getElementById('typing-indicator');
+                        if (indicator) messagesContainer.removeChild(indicator);
+
+                        // Generate response based on keywords
+                        let response = "I don't have specific information about that in our knowledge base. Can you please clarify or ask about our products, compliance, or company information?";
+                        let source = null;
+                        
+                        const lowerMessage = message.toLowerCase();
+                        
+                        // Check for keywords in responses
+                        for (const [keyword, resp] of Object.entries(responseDict)) {
+                            if (lowerMessage.includes(keyword.toLowerCase())) {
+                                response = resp;
+                                source = keyword.charAt(0).toUpperCase() + keyword.slice(1);
+                                
+                                // Add to memory if document chat
+                                if (messagesContainer === chatMessages) {
+                                    addToMemory('concept', keyword);
+                                }
+                                break;
+                            }
+                        }
+                        
+                        // Check for document references in document chat
+                        if (messagesContainer === chatMessages) {
+                            const activeDoc = document.querySelector('.document-item.active');
+                            if (activeDoc) {
+                                const docId = activeDoc.getAttribute('data-id');
+                                const docTitle = documents[docId].title;
+                                
+                                if (lowerMessage.includes(docTitle.toLowerCase()) || 
+                                    lowerMessage.includes('this document') || 
+                                    lowerMessage.includes('current document')) {
+                                    
+                                    response = generateDocumentResponse(docId);
+                                    source = docTitle;
+                                    
+                                    // Add to memory
+                                    addToMemory('document', docTitle);
+                                }
+                            }
+                        }
+
+                        // Add AI response
+                        addMessage(response, 'ai', messagesContainer, source);
+                    }, 1500);
+                }, 500);
+            }
+
+            function addMessage(text, sender, container, source = null) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}-message`;
+                
+                if (source && sender === 'ai') {
+                    // Add citation to the text
+                    const highlightedText = text.replace(/\b(SecureVault|DataInsight|ComplianceGuard|CloudNorth|PIPEDA|Canadian|AI)\b/g, 
+                        match => `<span class="highlight">${match}</span>`);
+                    
+                    messageDiv.innerHTML = `
+                        <p>${highlightedText}</p>
+                        <div class="message-source">Source: ${source}</div>
+                    `;
+                } else {
+                    messageDiv.textContent = text;
+                }
+                
+                container.appendChild(messageDiv);
+                container.scrollTop = container.scrollHeight;
+            }
+
+            function addToMemory(type, value) {
+                // Check if already in memory
+                const exists = chatMemory.some(item => 
+                    item.type === type && item.value === value);
+                
+                if (!exists) {
+                    chatMemory.push({ type, value });
+                    updateMemoryDisplay();
+                }
+            }
+
+            function updateMemoryDisplay() {
+                const memoryItems = document.getElementById('memory-items');
+                const memoryCount = document.getElementById('memory-count');
+                
+                memoryItems.innerHTML = '';
+                chatMemory.forEach(item => {
+                    const memoryItem = document.createElement('div');
+                    memoryItem.className = 'memory-item';
+                    
+                    let icon = '💡';
+                    if (item.type === 'document') {
+                        icon = '📄';
+                    } else if (item.type === 'concept') {
+                        icon = '🧠';
+                    }
+                    
+                    memoryItem.innerHTML = `<span>${icon}</span> ${item.value}`;
+                    memoryItems.appendChild(memoryItem);
+                });
+                
+                // Update memory count
+                memoryCount.textContent = chatMemory.length;
+            }
+
+            function generateDocumentResponse(docId) {
+                switch(docId) {
+                    case 'D001':
+                        return "The SecureVault Product Manual describes our flagship enterprise-grade data encryption and security solution. Key features include end-to-end encryption using AES-256 and RSA-4096 algorithms, Canadian data residency with geo-fencing capabilities, PIPEDA compliance frameworks, access control management, comprehensive audit logging, and advanced threat detection. It ensures all data remains within Canadian borders through our network of data centers.";
+                    case 'D002':
+                        return "The Canadian Data Residency Guide explains that data residency refers to the geographic location where an organization's data is stored and processed. In Canada, key legislation includes PIPEDA, provincial privacy laws, and the upcoming CPPA. Organizations must ensure personal health information, public sector data, and financial records remain within Canadian borders. Penalties for non-compliance can reach $10 million or 3% of global revenue under CPPA.";
+                    case 'D003':
+                        return "The Company Overview document explains that Northern Tech Solutions is a Canadian technology company founded in 2011 and headquartered in Toronto. Our mission is empowering Canadian businesses with innovative technology solutions while maintaining the highest standards of data privacy and security. We have offices in Toronto, Montreal, Vancouver, and Calgary. Our product suite includes SecureVault, CloudNorth, DataInsight, ComplianceGuard, and NorthStar CRM.";
+                    case 'D007':
+                        return "The AI Integration Whitepaper explores best practices for integrating AI capabilities into enterprise systems with a focus on Canadian regulatory requirements. It covers the Canadian AI regulatory landscape including AIDA requirements, privacy-preserving techniques like federated learning and differential privacy, and our Canadian-hosted AI platform. The implementation methodology includes business objective definition, data inventory, model selection, Canadian infrastructure deployment, and ongoing compliance monitoring.";
+                    default:
+                        return "I can provide information about this document if you have specific questions.";
+                }
+            }
+
+            // Initialize Charts
+            function initializeCharts() {
+                // Revenue Chart Data
+                const revenueData = {
+                    labels: ['2023 Q1', '2023 Q2', '2023 Q3', '2023 Q4', '2024 Q1', '2024 Q2', '2024 Q3', '2024 Q4'],
+                    values: [3450000, 3650000, 3800000, 3950000, 4250000, 4450000, 4650000, 4850000],
+                    actual: 6, // First 6 points are actual data
+                };
+
+                // Product Chart Data
+                const productData = {
+                    labels: ['SecureVault', 'CloudNorth', 'DataInsight', 'ComplianceGuard', 'NorthStar CRM'],
+                    values: [3250000, 4750000, 2850000, 2100000, 1950000],
+                };
+
+                // Create Revenue Line Chart
+                createLineChart('revenue-chart', revenueData);
+                
+                // Create Product Bar Chart
+                createBarChart('product-chart', productData);
+            }
+
+            function createLineChart(containerId, data) {
+                const container = document.getElementById(containerId);
+                const width = container.clientWidth;
+                const height = container.clientHeight - 30; // Subtract for labels
+                
+                // Calculate scales
+                const maxValue = Math.max(...data.values) * 1.1;
+                const xStep = width / (data.labels.length - 1);
+                
+                // Create SVG element
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('width', width);
+                svg.setAttribute('height', height);
+                
+                // Create actual data line path
+                let actualPath = `M ${0} ${height - (data.values[0] / maxValue) * height}`;
+                for (let i = 1; i < data.actual; i++) {
+                    actualPath += ` L ${i * xStep} ${height - (data.values[i] / maxValue) * height}`;
+                }
+                
+                // Create forecast data line path
+                let forecastPath = `M ${(data.actual - 1) * xStep} ${height - (data.values[data.actual - 1] / maxValue) * height}`;
+                for (let i = data.actual; i < data.values.length; i++) {
+                    forecastPath += ` L ${i * xStep} ${height - (data.values[i] / maxValue) * height}`;
+                }
+                
+                // Create area path for actual data
+                let areaPath = actualPath + ` L ${(data.actual - 1) * xStep} ${height} L 0 ${height} Z`;
+                
+                // Add paths to SVG
+                const actualLine = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                actualLine.setAttribute('d', actualPath);
+                actualLine.setAttribute('class', 'chart-line-path');
+                svg.appendChild(actualLine);
+                
+                const forecastLine = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                forecastLine.setAttribute('d', forecastPath);
+                forecastLine.setAttribute('class', 'chart-forecast-path');
+                svg.appendChild(forecastLine);
+                
+                const areaFill = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                areaFill.setAttribute('d', areaPath);
+                areaFill.setAttribute('class', 'chart-area-path');
+                svg.appendChild(areaFill);
+                
+                // Add points
+                for (let i = 0; i < data.values.length; i++) {
+                    const x = i * xStep;
+                    const y = height - (data.values[i] / maxValue) * height;
+                    
+                    const point = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    point.setAttribute('cx', x);
+                    point.setAttribute('cy', y);
+                    point.setAttribute('r', i < data.actual ? 4 : 3);
+                    point.setAttribute('fill', i < data.actual ? 'var(--primary-blue)' : 'var(--primary-red)');
+                    svg.appendChild(point);
+                    
+                    // Add labels
+                    const label = document.createElement('div');
+                    label.className = 'chart-bar-label';
+                    label.style.left = `${x}px`;
+                    label.textContent = data.labels[i];
+                    container.appendChild(label);
+                    
+                    // Add values for selected points
+                    if (i % 2 === 0 || i === data.values.length - 1) {
+                        const value = document.createElement('div');
+                        value.className = 'chart-bar-value';
+                        value.style.left = `${x}px`;
+                        value.style.top = `${y - 5}px`;
+                        value.textContent = `$${(data.values[i] / 1000000).toFixed(1)}M`;
+                        container.appendChild(value);
+                    }
+                }
+                
+                // Add SVG to container
+                container.appendChild(svg);
+            }
+
+            function createBarChart(containerId, data) {
+                const container = document.getElementById(containerId);
+                const width = container.clientWidth;
+                const height = container.clientHeight - 30; // Subtract for labels
+                
+                // Calculate scales
+                const maxValue = Math.max(...data.values) * 1.1;
+                const barWidth = width / data.labels.length * 0.6;
+                const barSpacing = width / data.labels.length;
+                
+                // Add bars
+                for (let i = 0; i < data.labels.length; i++) {
+                    const barHeight = (data.values[i] / maxValue) * height;
+                    const x = i * barSpacing + barSpacing / 2 - barWidth / 2;
+                    
+                    const bar = document.createElement('div');
+                    bar.className = 'chart-bar';
+                    bar.style.left = `${x}px`;
+                    bar.style.width = `${barWidth}px`;
+                    bar.style.height = `${barHeight}px`;
+                    container.appendChild(bar);
+                    
+                    // Add label
+                    const label = document.createElement('div');
+                    label.className = 'chart-bar-label';
+                    label.style.left = `${x + barWidth / 2}px`;
+                    label.textContent = data.labels[i];
+                    container.appendChild(label);
+                    
+                    // Add value
+                    const value = document.createElement('div');
+                    value.className = 'chart-bar-value';
+                    value.style.left = `${x + barWidth / 2}px`;
+                    value.style.bottom = `${barHeight + 5}px`;
+                    value.textContent = `$${(data.values[i] / 1000000).toFixed(1)}M`;
+                    container.appendChild(value);
+                }
+            }
+
+            // Initialize everything
+            initializeCharts();
+        });
+    </script>
+</body>
+</html>
