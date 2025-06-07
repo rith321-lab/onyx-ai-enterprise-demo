@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northern Tech Solutions - AI Enterprise Search Demo</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-red: #e63946;
+            --primary-white: #f1faee;
+            --primary-light-blue: #a8dadc;
+            --primary-blue: #457b9d;
+            --primary-dark-blue: #1d3557;
+            --compliant-green: #2a9d8f;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #dee2e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            border-top: 5px solid var(--primary-red);
+            position: relative;
+        }
+
+        .container::before {
+            content: "🍁";
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 36px;
+            color: var(--primary-red);
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .logo h1 {
+            font-size: 32px;
+            color: var(--primary-dark-blue);
+            margin-left: 10px;
+        }
+
+        .maple-leaf-header {
+            color: var(--primary-red);
+            font-size: 32px;
+        }
+
+        .compliance-indicator {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--compliant-green);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .shield-icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: var(--primary-blue);
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .callout {
+            background-color: var(--primary-light-blue);
+            color: var(--primary-dark-blue);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            font-size: 18px;
+            font-weight: 500;
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .buttons-container {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            min-width: 280px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: white;
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark-blue);
+            border-color: var(--primary-dark-blue);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(69, 123, 157, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn i {
+            margin-right: 10px;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            .logo h1 {
+                font-size: 28px;
+            }
+            h2 {
+                font-size: 20px;
+            }
+            .btn {
+                font-size: 16px;
+                padding: 10px 20px;
+                min-width: unset;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="maple-leaf-header">🍁</span>
+                <h1>Northern Tech Solutions</h1>
+            </div>
+            <div class="compliance-indicator">
+                <span class="shield-icon">🛡️</span>
+                <span>Canadian Data Compliant AI</span>
+            </div>
+        </header>
+
+        <p>Welcome to the <strong>AI Enterprise Search & Insights Demo</strong> for Northern Tech Solutions. This platform showcases advanced AI capabilities for data exploration and document understanding, built with a strong focus on Canadian data compliance and privacy.</p>
+
+        <h2>Demo Features</h2>
+        <p>This demonstration includes:</p>
+        <ul style="text-align: left; margin-left: 30px; margin-bottom: 20px;">
+            <li>Document Q&A with memory and context awareness</li>
+            <li>Interactive business intelligence charts and analytics</li>
+            <li>Multi-LLM support (OpenAI, Anthropic, DeepSeek)</li>
+            <li>Canadian data residency and PIPEDA compliance</li>
+            <li>Real-time document upload simulation</li>
+        </ul>
+
+        <div class="callout">
+            <strong>Important Note:</strong> The UI demo is fully functional, but the live AI chat features require local setup due to API security constraints.
+        </div>
+
+        <h2>Accessing the Demo</h2>
+        <p>You have two options to explore this demonstration:</p>
+
+        <div class="buttons-container">
+            <a href="./demo/working-demo.html" class="btn btn-primary">
+                <i>🖥️</i> View UI Demo
+            </a>
+            <p style="font-size: 14px; margin-top: -10px;">Explore the interface, document library, and analytics visualizations</p>
+            
+            <a href="https://github.com/rith321-lab/onyx-ai-enterprise-demo" target="_blank" class="btn btn-secondary">
+                <i>📋</i> GitHub Repository
+            </a>
+            <p style="font-size: 14px; margin-top: -10px;">Get setup instructions for full AI functionality</p>
+        </div>
+
+        <h2>Local Setup for Live AI</h2>
+        <p>For the complete experience with live AI chat:</p>
+        <ol style="text-align: left; margin-left: 30px; margin-bottom: 20px;">
+            <li>Clone the repository from GitHub</li>
+            <li>Navigate to the demo directory</li>
+            <li>Run a local server: <code>python3 -m http.server 8088</code></li>
+            <li>Visit: <code>http://localhost:8088/working-demo.html</code></li>
+        </ol>
+        <p>This local setup ensures your API keys remain secure and avoids cross-origin resource sharing (CORS) issues.</p>
+
+        <h2>Canadian Compliance</h2>
+        <p>This solution demonstrates key Canadian compliance features:</p>
+        <ul style="text-align: left; margin-left: 30px; margin-bottom: 20px;">
+            <li>Data residency indicators throughout the interface</li>
+            <li>PIPEDA compliance messaging and documentation</li>
+            <li>Privacy-first design principles</li>
+            <li>Geo-fencing and sovereignty assurance</li>
+        </ul>
+
+        <footer>
+            <p>Prepared for Aaron & Elisabeth | Northern Tech Solutions | June 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
